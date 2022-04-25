@@ -13,3 +13,4 @@ Acesse a aplicação em [http://localhost:4200](http://localhost:4200)
 
 *Para sua execução certifique-se também de possuir o [NodeJS](http://nodejs.org).*  
 *A instalação do @angular/cli acima pode necessitar ser executada como admin do sistema*  
+
