@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
 
 import { SharedModule } from '../../shared/shared.module';
 
@@ -34,6 +35,7 @@ import { CadastrarPfService } from './services';
     MatTooltipModule,
     MatIconModule,
     MatSnackBarModule,
+    MatSelectModule,
     SharedModule
   ],
   declarations: [
