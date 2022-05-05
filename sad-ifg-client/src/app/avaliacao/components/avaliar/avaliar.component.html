@@ -1,0 +1,135 @@
+<form  class="content" novalidate class="content">
+    <mat-list role="list">
+      <mat-list-item class="right">
+        <a mat-button color="warn" routerLink="/avaliacao/listagem">
+            Histórico de Notas
+        </a>
+      </mat-list-item>
+    </mat-list>
+        <mat-horizontal-stepper linear>
+                <mat-step>
+                  <mat-list> 
+                      <mat-list-item >
+                          <strong>Data:</strong>&nbsp;{{ dataAtual }}&nbsp;&nbsp;&nbsp;
+                          <strong>Aluno:</strong>&nbsp;Patrick Cavalcante Moraes&nbsp;&nbsp;&nbsp;
+                          <strong>Matricula:</strong>&nbsp;20181080080199
+                      </mat-list-item>
+                      <mat-list-item >
+                          <strong>Professor:</strong>&nbsp;Wendell Bento Geraldes&nbsp;&nbsp;&nbsp;
+                          <strong>Campus:</strong>&nbsp;Luziânia
+                      </mat-list-item>
+                      <mat-list-item >
+                        <strong>
+                            De acordo com a Res. Consup IFG nº 040/2018, Regimento Geral do IFG, 
+                            Art. 190-193,198-201, avalie a atuação do Docente na avaliação a seguir, atuante em 2022, 
+                            atribuindo-lhe nota numa escala de 0 (zero) à 10(dez).
+                        </strong>
+                      </mat-list-item>
+                    </mat-list>
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 1:</strong>
+                  <p>Plano de ensino: O/a professor/a apresentou e discutiu com a turma, no início do semestre, o programa da disciplina?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota1" mascara="00"/>
+                  </mat-form-field>
+              </mat-step>
+      
+              <mat-step state="notasIcon">
+                  <strong>Questão 2:</strong>
+                  <p>Assiduidade e pontualidade: Esteve presente regularmente às atividades e cumpre horários de início e fim em sala de aula?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota2" mascara="00"/>
+                  </mat-form-field>
+      
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 3:</strong>
+                  <p>Dedicação: Demonstra interesse e disponibilidade em auxiliar e sanar as dúvidas dos(as) alunos(as) em sala de aula?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota3" mascara="00"/>
+                  </mat-form-field>	
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 4:</strong>
+                  <p>Didática: Demonstra preparo para ministrar os conteúdos previstos no plano de ensino?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota4" mascara="00"/>
+                  </mat-form-field>
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 5:</strong>
+                  <p>Professor/aluno: Demonstra ser acessível, cordial e zela pela harmonia do ambiente e respeito durante as atividades?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota5" mascara="00"/>
+                  </mat-form-field>
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 6:</strong>
+                  <p>Atendimento ao aluno: Informa os horários de atendimento extraclasse e demonstra interesse e disp. no atendimento ao aluno?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota6" mascara="00"/>
+                  </mat-form-field>
+              </mat-step>	
+              <mat-step state="notasIcon">
+                  <strong>Questão 7:</strong>
+                  <p>Recursos didáticos: Emprega diferentes recursos de aprendizagem como: quadro/giz, vídeo, slides, visitas técnicas, etc?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota7" mascara="00"/>
+                  </mat-form-field>
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 8:</strong>
+                  <p>Avaliação de aprendizagem: Utiliza diferentes métodos de avaliação: prova, pesquisa/trabalho, lista de exercícios, etc?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota8" mascara="00"/>
+                  </mat-form-field>	
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 9:</strong>
+                  <p>Avaliações: Deixa claro os conteúdos que serão avaliados, dosando os conteúdos cobrados entre uma avaliação e outra?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota9" mascara="00"/>
+                  </mat-form-field>		
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <strong>Questão 10:</strong>
+                  <p>Devolutiva: As avaliações são corrigidas, comentadas e devolvidas em tempo hábil?</p>
+                  <mat-form-field>
+                      <mat-label>Nota</mat-label>
+                      <input matInput placeholder="0 até 10"
+                          formControlName="nota10" mascara="00"/>
+                  </mat-form-field>
+              </mat-step>
+              <mat-step state="notasIcon">
+                  <p>Deseja realmente enviar esta avaliação?</p>
+                  <button mat-raised-button color="primary" >Enviar</button>	
+              </mat-step>
+      
+              <!-- Substituições de ícones -->
+              <ng-template matStepperIcon="notasIcon">
+                  <mat-icon>notes</mat-icon>
+              </ng-template>
+        </mat-horizontal-stepper>
+
+</form>
+    
+    

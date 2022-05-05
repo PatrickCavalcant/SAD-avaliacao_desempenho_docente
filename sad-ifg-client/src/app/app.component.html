@@ -1,14 +1,76 @@
-<mat-toolbar color="primary">
-  <span>SAD - Sistema de Avaliação Docente</span>
-  <span class="toolbar-spacer"></span>
-  <a (click)="sair()" style="cursor: pointer"
-    alt="Sair" title="Sair"
-    *ngIf="autenticado()">
-    <mat-icon 
-    	class="toolbar-icon"
-    	matTooltip="Sair">
-    	exit_to_app
-    </mat-icon>
-  </a>
-</mat-toolbar>
-<router-outlet></router-outlet>
+  <mat-toolbar class="header mat-elevation-z5">
+    <span>
+      <a routerLink="/home">
+        <img class="logo" src="assets/img/logo_header.png" alt="logo">
+      </a>
+    </span>
+    <span class="title-group">
+      SAD - Sistema de Avaliação Docente
+    </span>
+    <span class="toolbar-spacer"></span>
+    <a (click)="sair()" style="cursor: pointer"
+      alt="Sair" title="Sair"
+      *ngIf="autenticado()">
+      <mat-icon 
+          class="toolbar-icon"
+          matTooltip="Sair">
+          exit_to_app
+      </mat-icon>
+    </a>
+  </mat-toolbar>
+
+  <mat-sidenav-container *ngIf="autenticado()" >
+    <mat-sidenav class="sidenav" mode="side" opened 
+        fixedInViewport="true" fixedTopGap="64" >
+        <mat-nav-list class="nav-list"  >
+            <a mat-list-item routerLink="/home">
+                <i class="material-icons">
+                    home
+                </i>
+                Início
+            </a>
+            <a mat-list-item  routerLink="/avaliacao">
+                <i class="material-icons">
+                  question_answer
+                </i>
+                Avaliações
+            </a>
+            <a mat-list-item  routerLink="/admin/cadastro">
+              <i class="material-icons">
+                description
+              </i>
+              Criar Questionário
+            </a>
+            <a mat-list-item  routerLink="/cadastro-pj">
+              <i class="material-icons">
+                  store
+              </i>
+              Cadastro Empresa
+            </a>
+            <a mat-list-item  routerLink="/cadastro-pf">
+                <i class="material-icons">
+                    people_outline
+                </i>
+                Cadastro Usuários
+            </a>
+            <a mat-list-item  routerLink="/cadastro-pf">
+              <i class="material-icons">
+                note_add
+              </i>
+              Upload de Avaliação
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>    
+  </mat-sidenav-container>
+
+  <mat-toolbar class="footer mat-elevation-z7">
+    <span>
+      Desenvolvido por Instituto Federal de Goiás - Campus Luziânia
+    </span>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+
+
+
+
