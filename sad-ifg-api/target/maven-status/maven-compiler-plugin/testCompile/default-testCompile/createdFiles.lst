@@ -1,0 +1,10 @@
+br\edu\ifg\luziania\sad\api\controllers\LancamentoControllerTest.class
+br\edu\ifg\luziania\sad\api\PontoInteligenteApplicationTests.class
+br\edu\ifg\luziania\sad\api\utils\PasswordUtilsTest.class
+br\edu\ifg\luziania\sad\api\services\EmpresaServiceTest.class
+br\edu\ifg\luziania\sad\api\services\LancamentoServiceTest.class
+br\edu\ifg\luziania\sad\api\controllers\EmpresaControllerTest.class
+br\edu\ifg\luziania\sad\api\services\FuncionarioServiceTest.class
+br\edu\ifg\luziania\sad\api\repositories\EmpresaRepositoryTest.class
+br\edu\ifg\luziania\sad\api\repositories\FuncionarioRepositoryTest.class
+br\edu\ifg\luziania\sad\api\repositories\LancamentoRepositoryTest.class
