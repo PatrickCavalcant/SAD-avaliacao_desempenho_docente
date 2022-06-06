@@ -49,7 +49,7 @@ public class LancamentoControllerTest {
 	private static final String URL_BASE = "/api/lancamentos/";
 	private static final Long ID_FUNCIONARIO = 1L;
 	private static final Long ID_LANCAMENTO = 1L;
-	private static final String TIPO = TipoEnum.INICIO_TRABALHO.name();
+	private static final String TIPO = TipoEnum.AVALIACAO_ALUNO.name();
 	private static final Date DATA = new Date();
 	
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
