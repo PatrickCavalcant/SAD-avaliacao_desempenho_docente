@@ -32,14 +32,14 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.kazale.pontointeligente.api.controllers"))
+				.apis(RequestHandlerSelectors.basePackage("br.edu.ifg.luziania.sad.api.controllers"))
 				.paths(PathSelectors.any()).build()
 				.apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Ponto Inteligente API")
-				.description("Documentação da API de acesso aos endpoints do Ponto Inteligente.").version("1.0")
+		return new ApiInfoBuilder().title("SAD - Sistema de Avaliação de Desempenho Docente API")
+				.description("Documentação da API de acesso aos endpoints do SAD.").version("1.0")
 				.build();
 	}
 
