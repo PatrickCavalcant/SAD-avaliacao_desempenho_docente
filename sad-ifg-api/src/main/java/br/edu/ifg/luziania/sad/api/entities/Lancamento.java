@@ -28,8 +28,8 @@ public class Lancamento implements Serializable {
 
 	private Long id;
 	private Date data;
-	private String descricao;
-	private String localizacao;
+	private String periodo;
+	private String nota;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
 	private TipoEnum tipo;
@@ -58,22 +58,22 @@ public class Lancamento implements Serializable {
 		this.data = data;
 	}
 
-	@Column(name = "descricao", nullable = true)
-	public String getDescricao() {
-		return descricao;
+	@Column(name = "periodo", nullable = true)
+	public String getPeriodo() {
+		return periodo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
 	}
 	
-	@Column(name = "localizacao", nullable = true)
-	public String getLocalizacao() {
-		return localizacao;
+	@Column(name = "nota", nullable = true)
+	public String getNota() {
+		return nota;
 	}
 
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
+	public void setNota(String nota) {
+		this.nota = nota;
 	}
 
 	@Column(name = "data_criacao", nullable = false)
@@ -127,7 +127,7 @@ public class Lancamento implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Lancamento [id=" + id + ", data=" + data + ", descricao=" + descricao + ", localizacao=" + localizacao
+		return "Lancamento [id=" + id + ", data=" + data + ", periodo=" + periodo + ", nota=" + nota
 				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo
 				+ ", funcionario=" + funcionario + "]";
 	}

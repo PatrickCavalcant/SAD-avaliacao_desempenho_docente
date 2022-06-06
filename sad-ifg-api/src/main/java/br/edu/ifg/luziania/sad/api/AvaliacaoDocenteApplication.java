@@ -76,11 +76,12 @@ public class AvaliacaoDocenteApplication {
 		TipoEnum[] tipos = TipoEnum.values();
 
 		Lancamento lancamento;
-		for (int i=0; i<numLancamentos; i++) {
+		for (int i=0; i<3; i++) {
 			lancamento = new Lancamento();
 			lancamento.setData(new Date());
 			lancamento.setTipo(tipos[tipoPos++]);
-			lancamento.setLocalizacao("53.4546692,-2.2221622");
+			lancamento.setNota("9");
+			lancamento.setPeriodo("2022/1");
 			lancamento.setFuncionario(funcionario);
 			lancamentoRepository.save(lancamento);
 			if (tipoPos == tipos.length) {
