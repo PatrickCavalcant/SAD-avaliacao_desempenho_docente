@@ -20,9 +20,9 @@ import {
 } from './autenticacao';
 import { AppRoutingModule } from './app-routing.module';
 import {
-  FuncionarioModule,
-  FuncionarioRoutingModule
-} from './funcionario';
+  UsuarioModule,
+  UsuarioRoutingModule
+} from './usuario';
 import {
   AdminModule,
   AdminRoutingModule
@@ -56,8 +56,8 @@ import {
     CadastroPjRoutingModule,
     CadastroPfModule,
     CadastroPfRoutingModule,
-    FuncionarioModule,
-    FuncionarioRoutingModule,
+    UsuarioModule,
+    UsuarioRoutingModule,
     AdminModule,
     AdminRoutingModule,
     MatSidenavModule,

@@ -5,3 +5,58 @@
 .toolbar-spacer {
   flex: 1 1 auto;
 }
+
+.header{
+  align-items: center;
+  background-color: #3F51B5;
+
+}
+
+.header a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header .logo{
+  max-height: 40px;
+}
+
+.header .title-group{
+  padding-left: 25px;
+}
+
+.mat-elevation-z5 {
+  position: relative;
+  z-index: 2;
+}
+
+.sidenav {
+  display: flex;
+  background-color: #3F51B5;
+  width: 300px;
+}
+
+.sidenav a {
+  display: flex;
+  color: #FFF;
+}
+
+.sidenav i {
+  display: flex;
+  padding-right: 20px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer > span {
+  
+  font-size: 1.1rem;
+  font-weight: 300;
+}

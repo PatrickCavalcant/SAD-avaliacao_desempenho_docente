@@ -10,9 +10,9 @@ import { HttpUtilService } from './http-util.service';
 export class LancamentoService {
 
   private readonly PATH: string = 'lancamentos';
-  private readonly PATH_ULTIMO_LANC = '/funcionario/{funcionarioId}/ultimo';
-  private readonly PATH_LANCAMENTOS = '/funcionario/{funcionarioId}';
-  private readonly PATH_TODOS_LANC = '/funcionario/{funcionarioId}/todos';
+  private readonly PATH_ULTIMO_LANC = '/usuario/{usuarioId}/ultimo';
+  private readonly PATH_LANCAMENTOS = '/usuario/{usuarioId}';
+  private readonly PATH_TODOS_LANC = '/usuario/{usuarioId}/todos';
 
   constructor(
   	private http: HttpClient,
@@ -22,7 +22,7 @@ export class LancamentoService {
     return this.http.get(
         env.baseApiUrl + this.PATH + 
           this.PATH_ULTIMO_LANC.replace(
-            '{funcionarioId}', this.httpUtil.obterIdUsuario()),
+            '{usuarioId}', this.httpUtil.obterIdUsuario()),
         this.httpUtil.headers()
     );
   }
@@ -39,19 +39,19 @@ export class LancamentoService {
     return this.http.get(
         env.baseApiUrl + this.PATH + 
           this.PATH_TODOS_LANC.replace(
-            '{funcionarioId}', this.httpUtil.obterIdUsuario()),
+            '{usuarioId}', this.httpUtil.obterIdUsuario()),
         this.httpUtil.headers()
     );
   }
 
-  listarLancamentosPorFuncionario(
-      funcionarioId: string,
+  listarLancamentosPorUsuario(
+    usuarioId: string,
       pagina: number, 
       ordem: string, 
       direcao: string): Observable<any> {
 
     const url: string = env.baseApiUrl + this.PATH + 
-      this.PATH_LANCAMENTOS.replace('{funcionarioId}', funcionarioId);
+      this.PATH_LANCAMENTOS.replace('{usuarioId}', usuarioId);
     
     const params: string = '?pag=' + pagina +
       '&ord=' + ordem + '&dir=' + direcao;
@@ -74,6 +74,14 @@ export class LancamentoService {
   }
 
   atualizar(lancamento: Lancamento): Observable<any> {
+    return this.http.put(
+        env.baseApiUrl + this.PATH + '/' + lancamento.id, 
+        lancamento,
+        this.httpUtil.headers()
+    );
+  }
+
+  enviarNota(lancamento: Lancamento): Observable<any> {
     return this.http.put(
         env.baseApiUrl + this.PATH + '/' + lancamento.id, 
         lancamento,

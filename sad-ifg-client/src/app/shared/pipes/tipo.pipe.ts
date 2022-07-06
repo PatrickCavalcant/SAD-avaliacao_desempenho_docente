@@ -14,17 +14,14 @@ export class TipoPipe implements PipeTransform {
   obterTexto(tipo: Tipo): string {
   	let tipoDesc: string;
   	switch (tipo) {
-  		case Tipo.INICIO_TRABALHO:
-  			tipoDesc = 'Início do trabalho';
+  		case Tipo.AVALIACAO_ALUNO:
+  			tipoDesc = 'Avaliação do Aluno';
   			break;
-  		case Tipo.INICIO_ALMOCO:
-  			tipoDesc = 'Início do almoço';
+  		case Tipo.AUTO_AVALIACAO:
+  			tipoDesc = 'Autoavaliação ';
   			break;
-  		case Tipo.TERMINO_ALMOCO:
-  			tipoDesc = 'Término do almoço';
-  			break;
-  		case Tipo.TERMINO_TRABALHO:
-  			tipoDesc = 'Término do trabalho';
+  		case Tipo.AVALIACAO_SUPERIOR:
+  			tipoDesc = 'Avaliação do Superior ';
   			break;
   		default:
   			tipoDesc = tipo;
