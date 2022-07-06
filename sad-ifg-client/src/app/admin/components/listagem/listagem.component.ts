@@ -14,10 +14,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   LancamentoService,
   Lancamento,
-  Funcionario,
+  Usuario,
   Tipo,
   HttpUtilService,
-  FuncionarioService
+  UsuarioService
 } from '../../../shared';
 
 @Component({
@@ -28,11 +28,11 @@ import {
 export class ListagemComponent implements OnInit {
 
   dataSource: MatTableDataSource<Lancamento>;
-  colunas: string[] = ['data', 'tipo', 'localizacao', 'acao'];
-  funcionarioId: string;
+  colunas: string[] = ['data', 'tipo', 'periodo', 'discipina', 'nota', 'acao'];
+  usuarioId: string;
   totalLancamentos: number;
 
-  funcionarios: Funcionario[];
+  usuarios: Usuario[];
   @ViewChild(MatSelect, { static: true }) matSelect: MatSelect;
   form: FormGroup;
 
@@ -45,13 +45,13 @@ export class ListagemComponent implements OnInit {
     private httpUtil: HttpUtilService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private funcionarioService: FuncionarioService,
+    private UsuarioService: UsuarioService,
     private dialog: MatDialog) { }
 
   ngOnInit() {
     this.pagina = 0;
     this.ordemPadrao();
-    this.obterFuncionarios();
+    this.obterUsuarios();
     this.gerarForm();
   }
 
@@ -67,15 +67,15 @@ export class ListagemComponent implements OnInit {
   }
 
   get funcId(): string {
-    return sessionStorage['funcionarioId'] || false;
+    return sessionStorage['usuarioId'] || false;
   }
 
-  obterFuncionarios() {
-    this.funcionarioService.listarFuncionariosPorEmpresa()
+  obterUsuarios() {
+    this.UsuarioService.listarUsuariosPorEmpresa()
       .subscribe(
         data => {
           const usuarioId: string = this.httpUtil.obterIdUsuario();
-          this.funcionarios = (data.data as Funcionario[])
+          this.usuarios = (data.data as Usuario[])
             .filter(func => func.id != usuarioId);
 
           if (this.funcId) {
@@ -84,7 +84,7 @@ export class ListagemComponent implements OnInit {
           }
         },
         err => {
-          const msg: string = "Erro obtendo funcionários.";
+          const msg: string = "Erro obtendo usuários.";
           this.snackBar.open(msg, "Erro", { duration: 5000 });
         }
       );
@@ -92,16 +92,16 @@ export class ListagemComponent implements OnInit {
 
   exibirLancamentos() {
     if (this.matSelect.selected) {
-      this.funcionarioId = this.matSelect.selected['value'];
+      this.usuarioId = this.matSelect.selected['value'];
     } else if (this.funcId) {
-      this.funcionarioId = this.funcId;
+      this.usuarioId = this.funcId;
     } else {
       return;
     }
-    sessionStorage['funcionarioId'] = this.funcionarioId;
+    sessionStorage['usuarioId'] = this.usuarioId;
 
-    this.lancamentoService.listarLancamentosPorFuncionario(
-        this.funcionarioId, this.pagina, this.ordem, this.direcao)
+    this.lancamentoService.listarLancamentosPorUsuario(
+        this.usuarioId, this.pagina, this.ordem, this.direcao)
       .subscribe(
         data => {
           this.totalLancamentos = data['data'].totalElements;

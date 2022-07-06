@@ -19,6 +19,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -28,7 +31,7 @@ import {
   HttpUtilService,
   LancamentoService,
   PtBrMatPaginatorIntl,
-  FuncionarioService
+  UsuarioService
 } from '../shared';
 
 import {
@@ -62,6 +65,7 @@ import { AdminGuard } from './services';
     MatDialogModule,
     MatPaginatorModule,
     MatSortModule,
+    MatStepperModule,
     SharedModule
   ],
   declarations: [
@@ -75,8 +79,10 @@ import { AdminGuard } from './services';
     LancamentoService,
     HttpUtilService,
     MatPaginatorIntl,
-    FuncionarioService,
+    UsuarioService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {displayDefaultIndicatorType: false},},
     { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl },
     AdminGuard
   ],

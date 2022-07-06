@@ -3,17 +3,14 @@
   <mat-list-item class="right">
     <a mat-button color="warn" 
     routerLink="/admin/cadastro"
-    *ngIf="funcionarioId">
+    *ngIf="usuarioId">
       Adicionar Questionário
     </a>
     <a mat-button color="primary" routerLink="/cadastro-pf">
-      Cadastrar Funcionários
+      Cadastrar Usuários
     </a>
     <a mat-button color="primary" routerLink="/cadastro-pj">
       Cadastrar Empresa
-    </a>
-    <a mat-button color="primary" routerLink="/cadastro-pj">
-      teste
     </a>
   </mat-list-item>
 </mat-list>
@@ -22,14 +19,14 @@
   <mat-list-item class="left">
     <form [formGroup]="form" novalidate>
       <mat-form-field>
-        <mat-select placeholder="Funcionários"
+        <mat-select placeholder="Usuários"
           formControlName="funcs"
-          [(value)]="funcionarioId"
+          [(value)]="usuarioId"
           (selectionChange)="exibirLancamentos()">
           <mat-option 
-            *ngFor="let funcionario of funcionarios" 
-            [value]="funcionario.id">
-            {{ funcionario.nome }}
+            *ngFor="let usuario of usuarios" 
+            [value]="usuario.id">
+            {{ usuario.nome }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -40,7 +37,7 @@
 <mat-table #table [dataSource]="dataSource" 
   matSort (matSortChange)="ordenar($event)">
 
-	<ng-container matColumnDef="data">
+    <ng-container matColumnDef="data">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
       	Data
       </mat-header-cell>
@@ -58,22 +55,42 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="localizacao">
-      <mat-header-cell *matHeaderCellDef>
-      	Localização
+    <ng-container matColumnDef="periodo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      	Período
       </mat-header-cell>
       <mat-cell *matCellDef="let lancamento">
-      	{{ lancamento.localizacao }}
+      	{{ lancamento.periodo }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="discipina">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      	Discipina
+      </mat-header-cell>
+      <mat-cell *matCellDef="let lancamento">
+      	{{ lancamento.discipina }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nota">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      	Nota
+      </mat-header-cell>
+      <mat-cell *matCellDef="let lancamento">
+      	{{ lancamento.nota }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="acao">
       <mat-header-cell *matHeaderCellDef>Ação</mat-header-cell>
       <mat-cell *matCellDef="let lancamento">
-        <a routerLink="{{ '/admin/atualizacao/' + lancamento.id }}"
-          ><mat-icon matTooltip="Editar lançamento">create</mat-icon></a>
-        <a (click)="removerDialog(lancamento.id)" 
-          style="cursor: pointer"><mat-icon matTooltip="Remover lançamento">clear</mat-icon></a>
+        <a routerLink="{{ '/admin/atualizacao/' + lancamento.id }}">
+          <mat-icon matTooltip="Editar lançamento">create</mat-icon>
+        </a>
+        <a (click)="removerDialog(lancamento.id)" style="cursor: pointer">
+          <mat-icon matTooltip="Remover lançamento">clear</mat-icon>
+        </a>
       </mat-cell>
     </ng-container>
 
