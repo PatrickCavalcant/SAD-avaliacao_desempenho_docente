@@ -9,16 +9,27 @@
         <mat-horizontal-stepper linear>
                 <mat-step>
                   <mat-list> 
-                      <mat-list-item >
-                          <strong>Data:</strong>&nbsp;{{ dataAtual }}&nbsp;&nbsp;&nbsp;
-                          <strong>Aluno:</strong>&nbsp;Patrick Cavalcante Moraes&nbsp;&nbsp;&nbsp;
+                      <mat-list-item>
+                        <strong>Selecione o Professor:&nbsp;&nbsp;</strong>
+                        <mat-form-field>
+                            <mat-select
+                                formControlName="funcs"
+                                [(value)]="usuarioId">
+                                <mat-option 
+                                    *ngFor="let usuario of usuarios" 
+                                    [value]="usuario.id">
+                                    {{ usuario.nome }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Campus:</strong>&nbsp;Luziânia
+                      </mat-list-item>
+                      <mat-list-item>
+                          <strong>Data:</strong>&nbsp;{{ dataAtual }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <strong>Aluno:</strong>&nbsp;Patrick Cavalcante Moraes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <strong>Matricula:</strong>&nbsp;20181080080199
                       </mat-list-item>
-                      <mat-list-item >
-                          <strong>Professor:</strong>&nbsp;Wendell Bento Geraldes&nbsp;&nbsp;&nbsp;
-                          <strong>Campus:</strong>&nbsp;Luziânia
-                      </mat-list-item>
-                      <mat-list-item >
+                      <mat-list-item>
                         <strong>
                             De acordo com a Res. Consup IFG nº 040/2018, Regimento Geral do IFG, 
                             Art. 190-193,198-201, avalie a atuação do Docente na avaliação a seguir, atuante em 2022, 
