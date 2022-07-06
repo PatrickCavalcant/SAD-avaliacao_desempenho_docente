@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     //recebe o token da API REST redirecionando para telas de ADMIN caso o token for igual a 1,
-    //token diferente de 1 redireciona para tela de funcionario
+    //token diferente de 1 redireciona para tela de usuario
     const login: Login = this.form.value;
     this.loginService.logar(login)
       .subscribe(
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           if (usuarioData['role'] == 'ROLE_ADMIN') {
             this.router.navigate(['/admin']);
           } else {
-            this.router.navigate(['/funcionario']);
+            this.router.navigate(['/usuario']);
           }
         },
         //Tratativa de erros
