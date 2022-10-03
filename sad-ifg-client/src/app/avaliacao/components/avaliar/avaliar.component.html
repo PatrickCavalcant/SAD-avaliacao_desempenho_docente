@@ -26,8 +26,19 @@
                       </mat-list-item>
                       <mat-list-item>
                           <strong>Data:</strong>&nbsp;{{ dataAtual }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <strong>Aluno:</strong>&nbsp;Patrick Cavalcante Moraes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <strong>Matricula:</strong>&nbsp;20181080080199
+                          <strong>Aluno:&nbsp;&nbsp;</strong>
+                          <mat-form-field>
+                            <mat-select
+                                formControlName="userLogado"
+                                [(value)]="usuarioLogadoId">
+                                <mat-option 
+                                    *ngFor="let usuario of usuariosLogado" 
+                                    [value]="usuario.id">
+                                    {{ usuario.nome }}
+                                </mat-option>
+                            </mat-select>
+                          </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <!--<strong>Matricula:</strong>&nbsp;20181080080199-->
                       </mat-list-item>
                       <mat-list-item>
                         <strong>

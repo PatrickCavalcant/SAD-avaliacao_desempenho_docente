@@ -25,9 +25,11 @@ import {
 export class AvaliarComponent implements OnInit {
 
   dataAtual: string;
-
+  usuarioLogadoId: string;
   usuarioId: string;
+
   usuarios: Usuario[];
+  usuariosLogado: Usuario[];
   
   @ViewChild(MatSelect, { static: true }) matSelect: MatSelect;
   form: FormGroup;
@@ -44,12 +46,15 @@ export class AvaliarComponent implements OnInit {
     this.obterUsuarios();
     this.gerarForm();
     this.dataAtual = moment().format('DD/MM/YYYY HH:mm:ss');
+    this.getUserData();
   }
 
   gerarForm() {
     this.form = this.fb.group({
-      funcs: ['', []]
+      funcs: ['', []],
+      userLogado: ['', []]
     });
+
   }
 
   get funcId(): string {
@@ -65,7 +70,7 @@ export class AvaliarComponent implements OnInit {
             .filter(func => func.id != usuarioId); //Filto para retirada do usuário Administrador
 
           if (this.funcId) {
-            this.form.get('funcs').setValue(parseInt(this.funcId, 10));
+            this.form.get('funcs').setValue(parseInt(this.usuarioId, 10));
           }
         },
         err => {
@@ -75,5 +80,28 @@ export class AvaliarComponent implements OnInit {
       );
   }
 
+
+
+  get userId(): string {
+    return sessionStorage['usuarioLogadoId'] || false;
+  }
+
+  getUserData(){
+    this.UsuarioService.listarUsuariosPorEmpresa()
+    .subscribe(
+      dataL => {
+        const usuarioLogadoId: string = this.httpUtil.obterIdUsuario();
+        this.usuariosLogado = (dataL.data as Usuario[])
+        .filter(func => func.id == usuarioLogadoId); //Filto para retirada do usuário logado
+        this.form.get('userLogado').setValue(parseInt(this.usuarioLogadoId, 10));
+
+
+      },
+      err => {
+        const msg: string = "Erro obtendo usuários.";
+        this.snackBar.open(msg, "Erro", { duration: 5000 });
+      }
+    );
+  }
 
 }
