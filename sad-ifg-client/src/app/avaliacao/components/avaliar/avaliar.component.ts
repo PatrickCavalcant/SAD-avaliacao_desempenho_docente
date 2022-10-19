@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatSelect } from '@angular/material/select';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,6 +15,8 @@ import * as moment from 'moment';
 import {
   Usuario,
   UsuarioService,
+  LancamentoService,
+  Lancamento,
   HttpUtilService
 } from '../../../shared';
 
@@ -26,6 +29,12 @@ import { Avaliacao } from '../../models';
   styleUrls: ['./avaliar.component.css']
 })
 export class AvaliarComponent implements OnInit {
+  private dataAtualEn: string;
+  periodo: string;
+  tipo: string;
+  nota: string;
+
+  
   dataAtual: string;
   usuarioLogadoId: string;
   usuarioId: string;
@@ -48,8 +57,11 @@ export class AvaliarComponent implements OnInit {
   constructor( 
     private UsuarioService: UsuarioService,  
     private httpUtil: HttpUtilService,
+    private lancamentoService: LancamentoService,
+    private router: Router,
     private snackBar: MatSnackBar,
-    private fb: FormBuilder) {
+    private fb: FormBuilder
+    ) {
 
    }
 
@@ -57,6 +69,7 @@ export class AvaliarComponent implements OnInit {
     this.obterUsuarios();
     this.gerarForm();
     this.dataAtual = moment().format('DD/MM/YYYY HH:mm:ss');
+    this.dataAtualEn = moment().format('YYYY-MM-DD HH:mm:ss');
     this.getUserData();
 
   }
@@ -64,7 +77,17 @@ export class AvaliarComponent implements OnInit {
   gerarForm() {
     this.form = this.fb.group({
       userLogado: ['', []],
-      nota1: ['', [Validators.required]]
+      nota1: ['', [Validators.required, Validators.minLength(1)]],
+  		nota2: ['', [Validators.required, Validators.minLength(1)]],
+  		nota3: ['', [Validators.required, Validators.minLength(1)]],
+      nota4: ['', [Validators.required, Validators.minLength(1)]],
+  		nota5: ['', [Validators.required, Validators.minLength(1)]],
+  		nota6: ['', [Validators.required, Validators.minLength(1)]],
+      nota7: ['', [Validators.required, Validators.minLength(1)]],
+  		nota8: ['', [Validators.required, Validators.minLength(1)]],
+  		nota9: ['', [Validators.required, Validators.minLength(1)]],
+      nota10: ['', [Validators.required, Validators.minLength(1)]]
+
     });
 
       
@@ -135,8 +158,35 @@ export class AvaliarComponent implements OnInit {
 
     valor = ((nota1+nota2+nota3+nota4+nota5+nota6+nota7+nota8+nota9+nota10)/10);
     console.log(valor);
-
+    this.nota = "teste";
     media.push(valor);
+    this.cadastrar();
     return media;
+  }
+
+  cadastrar() {
+  	const lancamento: Lancamento = new Lancamento(
+      this.dataAtualEn,
+      this.tipo,
+      this.periodo,
+      this.nota,
+      this.httpUtil.obterIdUsuario()
+    );
+
+    this.lancamentoService.cadastrar(lancamento)
+      .subscribe(
+        data => {
+          const msg: string = "Lançamento realizado com sucesso!";
+          this.snackBar.open(msg, "Sucesso", { duration: 5000 });
+          this.router.navigate(['/usuario/listagem']);
+        },
+        err => {
+          let msg: string = "Tente novamente em instantes.";
+          if (err.status == 400) {
+            msg = err.error.errors.join(' ');
+          }
+          this.snackBar.open(msg, "Erro", { duration: 5000 });
+        }
+      );
   }
 }
