@@ -27,13 +27,13 @@ public class Empresa implements Serializable {
 	private String cnpj;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
-	private List<Funcionario> funcionarios;
+	private List<Usuario> usuarios;
 	
 	public Empresa() {
 	}
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) //altera 21-10-2022 GenerationType.AUTO para conseguir incluir carga via BD
 	public Long getId() {
 		return id;
 	}
@@ -79,12 +79,12 @@ public class Empresa implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setFuncionarios(List<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	@PreUpdate

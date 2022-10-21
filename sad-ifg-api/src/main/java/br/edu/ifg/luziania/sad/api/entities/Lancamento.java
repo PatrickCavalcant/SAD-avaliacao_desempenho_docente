@@ -3,20 +3,7 @@ package br.edu.ifg.luziania.sad.api.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import br.edu.ifg.luziania.sad.api.enums.TipoEnum;
 
@@ -29,17 +16,18 @@ public class Lancamento implements Serializable {
 	private Long id;
 	private Date data;
 	private String periodo;
+	private String disciplina;
 	private String nota;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
 	private TipoEnum tipo;
-	private Funcionario funcionario;
+	private Usuario usuario;
 
 	public Lancamento() {
 	}
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) //altera 21-10-2022 GenerationType.AUTO para conseguir incluir carga via BD
 	public Long getId() {
 		return id;
 	}
@@ -66,7 +54,16 @@ public class Lancamento implements Serializable {
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
 	}
-	
+
+	@Column(name = "disciplina", nullable = true)
+	public String getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
+
 	@Column(name = "nota", nullable = true)
 	public String getNota() {
 		return nota;
@@ -105,12 +102,12 @@ public class Lancamento implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	@PreUpdate
@@ -129,7 +126,7 @@ public class Lancamento implements Serializable {
 	public String toString() {
 		return "Lancamento [id=" + id + ", data=" + data + ", periodo=" + periodo + ", nota=" + nota
 				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo
-				+ ", funcionario=" + funcionario + "]";
+				+ ", usuario=" + usuario + "]";
 	}
 
 }
