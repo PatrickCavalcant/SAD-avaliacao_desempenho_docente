@@ -158,7 +158,9 @@ export class AvaliarComponent implements OnInit {
 
     valor = ((nota1+nota2+nota3+nota4+nota5+nota6+nota7+nota8+nota9+nota10)/10);
     console.log(valor);
-    this.nota = "teste";
+    this.nota = "10";
+    this.tipo = "AUTO_AVALIACAO";
+
     media.push(valor);
     this.cadastrar();
     return media;
