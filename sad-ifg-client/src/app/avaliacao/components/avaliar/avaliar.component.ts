@@ -32,7 +32,7 @@ export class AvaliarComponent implements OnInit {
   private dataAtualEn: string;
   periodo: string;
   tipo: string;
-  nota: string;
+  nota: Number;
 
   
   dataAtual: string;
@@ -51,6 +51,8 @@ export class AvaliarComponent implements OnInit {
   @ViewChild('nota8') nota8:ElementRef; 
   @ViewChild('nota9') nota9:ElementRef; 
   @ViewChild('nota10') nota10:ElementRef; 
+  @ViewChild('professorId') professorId:ElementRef; 
+
 
   @ViewChild(MatSelect, { static: true }) matSelect: MatSelect;
   form: FormGroup;
@@ -153,27 +155,27 @@ export class AvaliarComponent implements OnInit {
     const nota9 = parseFloat(this.nota9.nativeElement.value);
     const nota10 = parseFloat(this.nota10.nativeElement.value);
     const media: number[] = Array();
-
     let valor: number;
-
     valor = ((nota1+nota2+nota3+nota4+nota5+nota6+nota7+nota8+nota9+nota10)/10);
-    console.log(valor);
-    this.nota = "10";
-    this.tipo = "AUTO_AVALIACAO";
-
+    this.nota = valor;
     media.push(valor);
+
     this.cadastrar();
+
     return media;
   }
 
   cadastrar() {
   	const lancamento: Lancamento = new Lancamento(
       this.dataAtualEn,
-      this.tipo,
-      this.periodo,
+      this.tipo = "AVALIACAO_ALUNO",
       this.nota,
-      this.httpUtil.obterIdUsuario()
+      this.periodo = "2022/2",
+      this.usuarioId //Professor avaliado
+      // this.httpUtil.obterIdUsuario()
     );
+
+    console.log(this.usuarioId);
 
     this.lancamentoService.cadastrar(lancamento)
       .subscribe(
