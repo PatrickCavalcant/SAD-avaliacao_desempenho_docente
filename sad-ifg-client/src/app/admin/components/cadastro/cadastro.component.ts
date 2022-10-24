@@ -24,6 +24,7 @@ export class CadastroComponent implements OnInit {
   horas: string[];
   minutos: string[];
   tipos: string[];
+  nota: Number;
 
   constructor(
     private fb: FormBuilder,
@@ -97,7 +98,7 @@ export class CadastroComponent implements OnInit {
     return new Lancamento(
         data.format('YYYY-MM-DD HH:mm:ss'),
         dados.tipo,
-        '',
+        this.nota,
         '',
         this.usuarioId
       );
