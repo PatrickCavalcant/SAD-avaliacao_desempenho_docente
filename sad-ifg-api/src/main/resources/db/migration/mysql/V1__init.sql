@@ -6,7 +6,7 @@ CREATE TABLE `empresa` (
   `razao_social` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `funcionario` (
+CREATE TABLE `usuario` (
   `id` bigint(20) NOT NULL,
   `cpf` varchar(255) NOT NULL,
   `data_atualizacao` datetime NOT NULL,
@@ -17,6 +17,8 @@ CREATE TABLE `funcionario` (
   `qtd_horas_almoco` float DEFAULT NULL,
   `qtd_horas_trabalho_dia` float DEFAULT NULL,
   `senha` varchar(255) NOT NULL,
+  `disciplina` varchar(255),
+  `periodo` varchar(255),
   `valor_hora` decimal(19,2) DEFAULT NULL,
   `empresa_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -27,9 +29,10 @@ CREATE TABLE `lancamento` (
   `data_atualizacao` datetime NOT NULL,
   `data_criacao` datetime NOT NULL,
   `periodo` varchar(255) DEFAULT NULL,
+  `disciplina` varchar(255) DEFAULT NULL,
   `nota` varchar(255) DEFAULT NULL,
   `tipo` varchar(255) NOT NULL,
-  `funcionario_id` bigint(20) DEFAULT NULL
+  `usuario_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -39,9 +42,9 @@ ALTER TABLE `empresa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `funcionario`
+-- Indexes for table `usuario`
 --
-ALTER TABLE `funcionario`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK4cm1kg523jlopyexjbmi6y54j` (`empresa_id`);
 
@@ -50,7 +53,7 @@ ALTER TABLE `funcionario`
 --
 ALTER TABLE `lancamento`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK46i4k5vl8wah7feutye9kbpi4` (`funcionario_id`);
+  ADD KEY `FK46i4k5vl8wah7feutye9kbpi4` (`usuario_id`);
 
 --
 -- AUTO_INCREMENT for table `empresa`
@@ -58,9 +61,9 @@ ALTER TABLE `lancamento`
 ALTER TABLE `empresa`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `funcionario`
+-- AUTO_INCREMENT for table `usuario`
 --
-ALTER TABLE `funcionario`
+ALTER TABLE `usuario`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `lancamento`
@@ -72,13 +75,15 @@ ALTER TABLE `lancamento`
 --
 
 --
--- Constraints for table `funcionario`
+-- Constraints for table `usuario`
 --
-ALTER TABLE `funcionario`
+ALTER TABLE `usuario`
   ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54j` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`);
 
 --
 -- Constraints for table `lancamento`
 --
 ALTER TABLE `lancamento`
-  ADD CONSTRAINT `FK46i4k5vl8wah7feutye9kbpi4` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionario` (`id`);
+  ADD CONSTRAINT `FK46i4k5vl8wah7feutye9kbpi4` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
+
+
