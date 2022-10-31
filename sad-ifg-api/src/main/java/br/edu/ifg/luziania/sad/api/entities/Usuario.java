@@ -34,6 +34,8 @@ public class Usuario implements Serializable {
 	private String nome;
 	private String email;
 	private String senha;
+	private String disciplina;
+	private String periodo;
 	private String cpf;
 	private BigDecimal valorHora;
 	private Float qtdHorasTrabalhoDia;
@@ -73,6 +75,24 @@ public class Usuario implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Column(name = "disciplina", nullable = false)
+	public String getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	@Column(name = "periodo", nullable = false)
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
 	}
 
 	@Column(name = "cpf", nullable = false)
@@ -163,6 +183,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	public Empresa getEmpresa() {
 		return empresa;
@@ -197,8 +218,8 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
 				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
-				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao="
-				+ dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", empresa=" + empresa + "]";
+				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
+				+ dataAtualizacao + ", empresa=" + empresa + ", disciplina=" + disciplina + ", periodo=" + periodo + "]";
 	}
 
 }
