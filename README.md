@@ -17,7 +17,7 @@ TCC -  (SAD  - Sistema de Avaliação Desempenho Docente do Instituto Federal de
 A integração consistui em consumir uma API Restful em Spring e Java, com cadastro de usuários, autenticação via token JWT (JSON Web Token) e CRUDs de cadastro, que incluem listagem de dados com paginação e ordenação.
 </p>
 
-<a href="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-api"> <h3> Sistema de Avaliação Desempenho Docente API Rest</h3> </a>
+<a href="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-api"> <h3> Sistema de Avaliação Desempenho Docente API RESTful</h3> </a>
 API do sistema do SAD com Java e Spring Boot.
 ### Como executar a aplicação
 
