@@ -6,6 +6,17 @@ CREATE TABLE `empresa` (
   `razao_social` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `disciplina` (
+  `id` bigint(20) NOT NULL,
+  `data_atualizacao` datetime NOT NULL,
+  `data_criacao` datetime NOT NULL,
+  `professor` varchar(255) NOT NULL,
+  `aluno` varchar(255) NOT NULL,
+  `disciplina` varchar(255),
+  `periodo` varchar(255),
+  `empresa_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `usuario` (
   `id` bigint(20) NOT NULL,
   `cpf` varchar(255) NOT NULL,
@@ -49,6 +60,13 @@ ALTER TABLE `usuario`
   ADD KEY `FK4cm1kg523jlopyexjbmi6y54j` (`empresa_id`);
 
 --
+-- Indexes for table `disciplina`
+--
+ALTER TABLE `disciplina`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK4cm1kg523jlopyexjbmi6y54d` (`empresa_id`);
+
+--
 -- Indexes for table `lancamento`
 --
 ALTER TABLE `lancamento`
@@ -66,6 +84,11 @@ ALTER TABLE `empresa`
 ALTER TABLE `usuario`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `disciplina`
+--
+ALTER TABLE `disciplina`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `lancamento`
 --
 ALTER TABLE `lancamento`
@@ -79,6 +102,12 @@ ALTER TABLE `lancamento`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54j` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`);
+
+--
+-- Constraints for table `disciplina`
+--
+ALTER TABLE `disciplina`
+  ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54d` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`);
 
 --
 -- Constraints for table `lancamento`
