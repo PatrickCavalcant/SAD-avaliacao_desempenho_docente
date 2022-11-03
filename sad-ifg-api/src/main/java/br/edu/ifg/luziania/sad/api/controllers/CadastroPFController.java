@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifg.luziania.sad.api.dtos.CadastroPFDto;
 import br.edu.ifg.luziania.sad.api.entities.Empresa;
-import br.edu.ifg.luziania.sad.api.entities.Funcionario;
+import br.edu.ifg.luziania.sad.api.entities.Usuario;
 import br.edu.ifg.luziania.sad.api.enums.PerfilEnum;
 import br.edu.ifg.luziania.sad.api.response.Response;
 import br.edu.ifg.luziania.sad.api.services.EmpresaService;
-import br.edu.ifg.luziania.sad.api.services.FuncionarioService;
+import br.edu.ifg.luziania.sad.api.services.UsuarioService;
 import br.edu.ifg.luziania.sad.api.services.utils.PasswordUtils;
 
 @RestController
@@ -38,13 +38,13 @@ public class CadastroPFController {
 	private EmpresaService empresaService;
 	
 	@Autowired
-	private FuncionarioService funcionarioService;
+	private UsuarioService usuarioService;
 
 	public CadastroPFController() {
 	}
 
 	/**
-	 * Cadastra um funcionário pessoa física no sistema.
+	 * Cadastra um usuário pessoa física no sistema.
 	 * 
 	 * @param cadastroPFDto
 	 * @param result
@@ -58,7 +58,7 @@ public class CadastroPFController {
 		Response<CadastroPFDto> response = new Response<CadastroPFDto>();
 
 		validarDadosExistentes(cadastroPFDto, result);
-		Funcionario funcionario = this.converterDtoParaFuncionario(cadastroPFDto, result);
+		Usuario usuario = this.converterDtoParaUsuario(cadastroPFDto, result);
 
 		if (result.hasErrors()) {
 			log.error("Erro validando dados de cadastro PF: {}", result.getAllErrors());
@@ -67,15 +67,15 @@ public class CadastroPFController {
 		}
 		
 		Optional<Empresa> empresa = this.empresaService.buscarPorCnpj(cadastroPFDto.getCnpj());
-		empresa.ifPresent(emp -> funcionario.setEmpresa(emp));
-		this.funcionarioService.persistir(funcionario);
+		empresa.ifPresent(emp -> usuario.setEmpresa(emp));
+		this.usuarioService.persistir(usuario);
 
-		response.setData(this.converterCadastroPFDto(funcionario));
+		response.setData(this.converterCadastroPFDto(usuario));
 		return ResponseEntity.ok(response);
 	}
 
 	/**
-	 * Verifica se a empresa está cadastrada e se o funcionário não existe na base de dados.
+	 * Verifica se a empresa está cadastrada e se o usuário não existe na base de dados.
 	 * 
 	 * @param cadastroPFDto
 	 * @param result
@@ -86,56 +86,56 @@ public class CadastroPFController {
 			result.addError(new ObjectError("empresa", "Empresa não cadastrada."));
 		}
 		
-		this.funcionarioService.buscarPorCpf(cadastroPFDto.getCpf())
-			.ifPresent(func -> result.addError(new ObjectError("funcionario", "CPF já existente.")));
+		this.usuarioService.buscarPorCpf(cadastroPFDto.getCpf())
+			.ifPresent(func -> result.addError(new ObjectError("usuario", "CPF já existente.")));
 
-		this.funcionarioService.buscarPorEmail(cadastroPFDto.getEmail())
-			.ifPresent(func -> result.addError(new ObjectError("funcionario", "Email já existente.")));
+		this.usuarioService.buscarPorEmail(cadastroPFDto.getEmail())
+			.ifPresent(func -> result.addError(new ObjectError("usuario", "Email já existente.")));
 	}
 
 	/**
-	 * Converte os dados do DTO para funcionário.
+	 * Converte os dados do DTO para usuário.
 	 * 
 	 * @param cadastroPFDto
 	 * @param result
-	 * @return Funcionario
+	 * @return Usuario
 	 * @throws NoSuchAlgorithmException
 	 */
-	private Funcionario converterDtoParaFuncionario(CadastroPFDto cadastroPFDto, BindingResult result)
+	private Usuario converterDtoParaUsuario(CadastroPFDto cadastroPFDto, BindingResult result)
 			throws NoSuchAlgorithmException {
-		Funcionario funcionario = new Funcionario();
-		funcionario.setNome(cadastroPFDto.getNome());
-		funcionario.setEmail(cadastroPFDto.getEmail());
-		funcionario.setCpf(cadastroPFDto.getCpf());
-		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
-		funcionario.setSenha(PasswordUtils.gerarBCrypt(cadastroPFDto.getSenha()));
+		Usuario usuario = new Usuario();
+		usuario.setNome(cadastroPFDto.getNome());
+		usuario.setEmail(cadastroPFDto.getEmail());
+		usuario.setCpf(cadastroPFDto.getCpf());
+		usuario.setPerfil(PerfilEnum.ROLE_USUARIO);
+		usuario.setSenha(PasswordUtils.gerarBCrypt(cadastroPFDto.getSenha()));
 		cadastroPFDto.getQtdHorasAlmoco()
-				.ifPresent(qtdHorasAlmoco -> funcionario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
+				.ifPresent(qtdHorasAlmoco -> usuario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
 		cadastroPFDto.getQtdHorasTrabalhoDia()
-				.ifPresent(qtdHorasTrabDia -> funcionario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
-		cadastroPFDto.getValorHora().ifPresent(valorHora -> funcionario.setValorHora(new BigDecimal(valorHora)));
+				.ifPresent(qtdHorasTrabDia -> usuario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
+		cadastroPFDto.getValorHora().ifPresent(valorHora -> usuario.setValorHora(new BigDecimal(valorHora)));
 
-		return funcionario;
+		return usuario;
 	}
 
 	/**
-	 * Popula o DTO de cadastro com os dados do funcionário e empresa.
+	 * Popula o DTO de cadastro com os dados do usuário e empresa.
 	 * 
-	 * @param funcionario
+	 * @param usuario
 	 * @return CadastroPFDto
 	 */
-	private CadastroPFDto converterCadastroPFDto(Funcionario funcionario) {
+	private CadastroPFDto converterCadastroPFDto(Usuario usuario) {
 		CadastroPFDto cadastroPFDto = new CadastroPFDto();
-		cadastroPFDto.setId(funcionario.getId());
-		cadastroPFDto.setNome(funcionario.getNome());
-		cadastroPFDto.setEmail(funcionario.getEmail());
-		cadastroPFDto.setCpf(funcionario.getCpf());
-		cadastroPFDto.setCnpj(funcionario.getEmpresa().getCnpj());
-		funcionario.getQtdHorasAlmocoOpt().ifPresent(qtdHorasAlmoco -> cadastroPFDto
+		cadastroPFDto.setId(usuario.getId());
+		cadastroPFDto.setNome(usuario.getNome());
+		cadastroPFDto.setEmail(usuario.getEmail());
+		cadastroPFDto.setCpf(usuario.getCpf());
+		cadastroPFDto.setCnpj(usuario.getEmpresa().getCnpj());
+		usuario.getQtdHorasAlmocoOpt().ifPresent(qtdHorasAlmoco -> cadastroPFDto
 				.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
-		funcionario.getQtdHorasTrabalhoDiaOpt().ifPresent(
+		usuario.getQtdHorasTrabalhoDiaOpt().ifPresent(
 				qtdHorasTrabDia -> cadastroPFDto.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
-		funcionario.getValorHoraOpt()
+		usuario.getValorHoraOpt()
 				.ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));
 
 		return cadastroPFDto;

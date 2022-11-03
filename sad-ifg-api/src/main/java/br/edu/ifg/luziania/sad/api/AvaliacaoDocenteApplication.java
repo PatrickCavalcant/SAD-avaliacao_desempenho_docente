@@ -1,12 +1,12 @@
 package br.edu.ifg.luziania.sad.api;
 
 import br.edu.ifg.luziania.sad.api.entities.Empresa;
-import br.edu.ifg.luziania.sad.api.entities.Funcionario;
+import br.edu.ifg.luziania.sad.api.entities.Usuario;
 import br.edu.ifg.luziania.sad.api.entities.Lancamento;
 import br.edu.ifg.luziania.sad.api.enums.PerfilEnum;
 import br.edu.ifg.luziania.sad.api.enums.TipoEnum;
 import br.edu.ifg.luziania.sad.api.repositories.EmpresaRepository;
-import br.edu.ifg.luziania.sad.api.repositories.FuncionarioRepository;
+import br.edu.ifg.luziania.sad.api.repositories.UsuarioRepository;
 import br.edu.ifg.luziania.sad.api.repositories.LancamentoRepository;
 import br.edu.ifg.luziania.sad.api.services.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AvaliacaoDocenteApplication {
 	private EmpresaRepository empresaRepository;
 
 	@Autowired
-	private FuncionarioRepository funcionarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
@@ -42,36 +42,46 @@ public class AvaliacaoDocenteApplication {
 		public void run(String...args) throws Exception {
 			Empresa empresa = new Empresa();
 			empresa.setRazaoSocial("Empresa Teste");
-			empresa.setCnpj("36763168000104");
+			empresa.setCnpj("99999999999999");
 			empresaRepository.save(empresa);
 
-			Funcionario funcionarioAdmin = new Funcionario();
-			funcionarioAdmin.setCpf("25164061422");
-			funcionarioAdmin.setEmail("admin@empresa.com");
-			funcionarioAdmin.setNome("Administrador");
-			funcionarioAdmin.setPerfil(PerfilEnum.ROLE_ADMIN);
-			funcionarioAdmin.setSenha(PasswordUtils.gerarBCrypt("123456"));
-			funcionarioAdmin.setEmpresa(empresa);
-			funcionarioRepository.save(funcionarioAdmin);
+			Usuario usuarioAdmin = new Usuario();
+			usuarioAdmin.setCpf("25164061422");
+			usuarioAdmin.setEmail("admin@empresa.com");
+			usuarioAdmin.setNome("Administrador");
+			usuarioAdmin.setPerfil(PerfilEnum.ROLE_ADMIN);
+			usuarioAdmin.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			usuarioAdmin.setEmpresa(empresa);
+			usuarioRepository.save(usuarioAdmin);
 
-			Funcionario funcionario = new Funcionario();
-			funcionario.setCpf("09943636211");
-			funcionario.setEmail("funcionario@empresa.com");
-			funcionario.setNome("Funcionário");
-			funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
-			funcionario.setSenha(PasswordUtils.gerarBCrypt("123456"));
-			funcionario.setEmpresa(empresa);
-			funcionarioRepository.save(funcionario);
+			Usuario usuario = new Usuario();
+			usuario.setCpf("09943636211");
+			usuario.setEmail("teste2@empresa.com");
+			usuario.setNome("Joao Freitas Oliveira");
+			usuario.setPerfil(PerfilEnum.ROLE_USUARIO);
+			usuario.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			usuario.setEmpresa(empresa);
+			usuarioRepository.save(usuario);
+
+			Usuario usuarioDocente = new Usuario();
+			usuarioDocente.setCpf("09943636212");
+			usuarioDocente.setEmail("teste@empresa.com");
+			usuarioDocente.setNome("Joao Freitas Pereira");
+			usuarioDocente.setPerfil(PerfilEnum.ROLE_USUARIO);
+			usuarioDocente.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			usuarioDocente.setEmpresa(empresa);
+			usuarioRepository.save(usuarioDocente);
 
 			empresaRepository.findAll().forEach(System.out::println);
-			//funcionarioRepository.findAll().forEach(System.out::println);
-			funcionarioRepository.findByEmpresaId(empresa.getId()).forEach(System.out::println);
+			//usuarioRepository.findAll().forEach(System.out::println);
+			usuarioRepository.findByEmpresaId(empresa.getId()).forEach(System.out::println);
 
-			gerarLancamentos(funcionario, 20);
+			gerarLancamentos(usuario, 20);
+			gerarLancamentos(usuarioDocente, 20);
 		}
 	}
 
-	private void gerarLancamentos(Funcionario funcionario, int numLancamentos) {
+	private void gerarLancamentos(Usuario usuario, int numLancamentos) {
 		int tipoPos = 0;
 		TipoEnum[] tipos = TipoEnum.values();
 
@@ -80,14 +90,15 @@ public class AvaliacaoDocenteApplication {
 			lancamento = new Lancamento();
 			lancamento.setData(new Date());
 			lancamento.setTipo(tipos[tipoPos++]);
-			lancamento.setNota("9");
+			lancamento.setNota("09");
 			lancamento.setPeriodo("2022/1");
-			lancamento.setFuncionario(funcionario);
+			lancamento.setUsuario(usuario);
 			lancamentoRepository.save(lancamento);
 			if (tipoPos == tipos.length) {
 				tipoPos = 0;
 			}
 		}
 	}
+
 
 }

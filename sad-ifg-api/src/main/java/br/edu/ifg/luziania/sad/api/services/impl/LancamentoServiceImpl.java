@@ -24,14 +24,14 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
 
-	public Page<Lancamento> buscarPorFuncionarioId(Long funcionarioId, PageRequest pageRequest) {
-		log.info("Buscando lançamentos para o funcionário ID {}", funcionarioId);
-		return this.lancamentoRepository.findByFuncionarioId(funcionarioId, pageRequest);
+	public Page<Lancamento> buscarPorUsuarioId(Long usuarioId, PageRequest pageRequest) {
+		log.info("Buscando lançamentos para o usuário ID {}", usuarioId);
+		return this.lancamentoRepository.findByUsuarioId(usuarioId, pageRequest);
 	}
 
-	public List<Lancamento> buscarTodosPorFuncionarioId(Long funcionarioId) {
-		log.info("Buscando todos os lançamentos para o funcionário ID {}", funcionarioId);
-		return this.lancamentoRepository.findByFuncionarioIdOrderByDataDesc(funcionarioId);
+	public List<Lancamento> buscarTodosPorUsuarioId(Long usuarioId) {
+		log.info("Buscando todos os lançamentos para o usuário ID {}", usuarioId);
+		return this.lancamentoRepository.findByUsuarioIdOrderByDataDesc(usuarioId);
 	}
 	
 	@Cacheable("lancamentoPorId")
@@ -52,10 +52,10 @@ public class LancamentoServiceImpl implements LancamentoService {
 	}
 
 	@Override
-	public Optional<Lancamento> buscarUltimoPorFuncionarioId(Long funcionarioId) {
-		log.info("Buscando o último lançamento por ID de funcionário {}", funcionarioId);
+	public Optional<Lancamento> buscarUltimoPorUsuarioId(Long usuarioId) {
+		log.info("Buscando o último lançamento por ID de usuário {}", usuarioId);
 		return Optional.ofNullable(
-				this.lancamentoRepository.findFirstByFuncionarioIdOrderByDataCriacaoDesc(funcionarioId));
+				this.lancamentoRepository.findFirstByUsuarioIdOrderByDataCriacaoDesc(usuarioId));
 	}
 
 }

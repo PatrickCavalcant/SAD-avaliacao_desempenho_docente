@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import br.edu.ifg.luziania.sad.api.entities.Funcionario;
+import br.edu.ifg.luziania.sad.api.entities.Usuario;
 import br.edu.ifg.luziania.sad.api.enums.PerfilEnum;
 
 public class JwtUserFactory {
@@ -15,14 +15,14 @@ public class JwtUserFactory {
 	}
 
 	/**
-	 * Converte e gera um JwtUser com base nos dados de um funcionário.
+	 * Converte e gera um JwtUser com base nos dados de um usuário.
 	 * 
-	 * @param funcionario
+	 * @param usuario
 	 * @return JwtUser
 	 */
-	public static JwtUser create(Funcionario funcionario) {
-		return new JwtUser(funcionario.getId(), funcionario.getEmail(), funcionario.getSenha(),
-				mapToGrantedAuthorities(funcionario.getPerfil()));
+	public static JwtUser create(Usuario usuario) {
+		return new JwtUser(usuario.getId(), usuario.getEmail(), usuario.getSenha(),
+				mapToGrantedAuthorities(usuario.getPerfil()));
 	}
 
 	/**

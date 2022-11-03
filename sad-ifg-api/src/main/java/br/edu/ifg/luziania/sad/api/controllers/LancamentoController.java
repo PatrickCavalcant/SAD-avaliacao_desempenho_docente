@@ -32,11 +32,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifg.luziania.sad.api.dtos.LancamentoDto;
-import br.edu.ifg.luziania.sad.api.entities.Funcionario;
+import br.edu.ifg.luziania.sad.api.entities.Usuario;
 import br.edu.ifg.luziania.sad.api.entities.Lancamento;
 import br.edu.ifg.luziania.sad.api.enums.TipoEnum;
 import br.edu.ifg.luziania.sad.api.response.Response;
-import br.edu.ifg.luziania.sad.api.services.FuncionarioService;
+import br.edu.ifg.luziania.sad.api.services.UsuarioService;
 import br.edu.ifg.luziania.sad.api.services.LancamentoService;
 
 @RestController
@@ -51,7 +51,7 @@ public class LancamentoController {
 	private LancamentoService lancamentoService;
 
 	@Autowired
-	private FuncionarioService funcionarioService;
+	private UsuarioService usuarioService;
 	
 	@Value("${paginacao.qtd_por_pagina}")
 	private int qtdPorPagina;
@@ -62,20 +62,20 @@ public class LancamentoController {
 	/**
 	 * Retorna a listagem de lançamentos de um funcionário.
 	 * 
-	 * @param funcionarioId
+	 * @param usuarioId
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 */
-	@GetMapping(value = "/funcionario/{funcionarioId}")
-	public ResponseEntity<Response<Page<LancamentoDto>>> listarPorFuncionarioId(
-			@PathVariable("funcionarioId") Long funcionarioId,
+	@GetMapping(value = "/usuario/{usuarioId}")
+	public ResponseEntity<Response<Page<LancamentoDto>>> listarPorUsuarioId(
+			@PathVariable("usuarioId") Long usuarioId,
 			@RequestParam(value = "pag", defaultValue = "0") int pag,
 			@RequestParam(value = "ord", defaultValue = "data") String ord,
 			@RequestParam(value = "dir", defaultValue = "DESC") String dir) {
-		log.info("Buscando lançamentos por ID do funcionário: {}, página: {}", funcionarioId, pag);
+		log.info("Buscando lançamentos por ID do funcionário: {}, página: {}", usuarioId, pag);
 		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
 
 		PageRequest pageRequest = PageRequest.of(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
-		Page<Lancamento> lancamentos = this.lancamentoService.buscarPorFuncionarioId(funcionarioId, pageRequest);
+		Page<Lancamento> lancamentos = this.lancamentoService.buscarPorUsuarioId(usuarioId, pageRequest);
 		Page<LancamentoDto> lancamentosDto = lancamentos.map(lancamento -> this.converterLancamentoDto(lancamento));
 
 		response.setData(lancamentosDto);
@@ -85,16 +85,16 @@ public class LancamentoController {
 	/**
 	 * Retorna a listagem de todos os lançamentos de um funcionário.
 	 *
-	 * @param funcionarioId
+	 * @param usuarioId
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 */
-	@GetMapping(value = "/funcionario/{funcionarioId}/todos")
-	public ResponseEntity<Response<List<LancamentoDto>>> listarTodosPorFuncionarioId(
-			@PathVariable("funcionarioId") Long funcionarioId) {
-		log.info("Buscando todos os lançamentos por ID do funcionário: {}", funcionarioId);
+	@GetMapping(value = "/usuario/{usuarioId}/todos")
+	public ResponseEntity<Response<List<LancamentoDto>>> listarTodosPorUsuarioId(
+			@PathVariable("usuarioId") Long usuarioId) {
+		log.info("Buscando todos os lançamentos por ID do funcionário: {}", usuarioId);
 		Response<List<LancamentoDto>> response = new Response<List<LancamentoDto>>();
 
-		List<Lancamento> lancamentos = this.lancamentoService.buscarTodosPorFuncionarioId(funcionarioId);
+		List<Lancamento> lancamentos = this.lancamentoService.buscarTodosPorUsuarioId(usuarioId);
 		List<LancamentoDto> lancamentosDto = lancamentos.stream()
 				.map(lancamento -> this.converterLancamentoDto(lancamento))
 				.collect(Collectors.toList());
@@ -138,7 +138,7 @@ public class LancamentoController {
 			BindingResult result) throws ParseException {
 		log.info("Adicionando lançamento: {}", lancamentoDto.toString());
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
-		validarFuncionario(lancamentoDto, result);
+		validarUsuario(lancamentoDto, result);
 		Lancamento lancamento = this.converterDtoParaLancamento(lancamentoDto, result);
 
 		if (result.hasErrors()) {
@@ -165,7 +165,7 @@ public class LancamentoController {
 			@Valid @RequestBody LancamentoDto lancamentoDto, BindingResult result) throws ParseException {
 		log.info("Atualizando lançamento: {}", lancamentoDto.toString());
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
-		validarFuncionario(lancamentoDto, result);
+		validarUsuario(lancamentoDto, result);
 		lancamentoDto.setId(Optional.of(id));
 		Lancamento lancamento = this.converterDtoParaLancamento(lancamentoDto, result);
 
@@ -206,16 +206,16 @@ public class LancamentoController {
 	/**
 	 * Retorna o último lançamento de um funcionário.
 	 *
-	 * @param funcionarioId
+	 * @param usuarioId
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 */
-	@GetMapping(value = "/funcionario/{funcionarioId}/ultimo")
-	public ResponseEntity<Response<LancamentoDto>> ultimoPorFuncionarioId(
-			@PathVariable("funcionarioId") Long funcionarioId) {
-		log.info("Buscando o último lançamento por ID do funcionário: {}", funcionarioId);
+	@GetMapping(value = "/usuario/{usuarioId}/ultimo")
+	public ResponseEntity<Response<LancamentoDto>> ultimoPorUsuarioId(
+			@PathVariable("usuarioId") Long usuarioId) {
+		log.info("Buscando o último lançamento por ID do usuario: {}", usuarioId);
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
 
-		Optional<Lancamento> lancamento = this.lancamentoService.buscarUltimoPorFuncionarioId(funcionarioId);
+		Optional<Lancamento> lancamento = this.lancamentoService.buscarUltimoPorUsuarioId(usuarioId);
 
 		if (lancamento.isPresent()) {
 			LancamentoDto lancamentoDto = this.converterLancamentoDto(lancamento.get());
@@ -232,16 +232,16 @@ public class LancamentoController {
 	 * @param lancamentoDto
 	 * @param result
 	 */
-	private void validarFuncionario(LancamentoDto lancamentoDto, BindingResult result) {
-		if (lancamentoDto.getFuncionarioId() == null) {
-			result.addError(new ObjectError("funcionario", "Funcionário não informado."));
+	private void validarUsuario(LancamentoDto lancamentoDto, BindingResult result) {
+		if (lancamentoDto.getUsuarioId() == null) {
+			result.addError(new ObjectError("usuario", "Usuario não informado."));
 			return;
 		}
 
-		log.info("Validando funcionário id {}: ", lancamentoDto.getFuncionarioId());
-		Optional<Funcionario> funcionario = this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId());
-		if (!funcionario.isPresent()) {
-			result.addError(new ObjectError("funcionario", "Funcionário não encontrado. ID inexistente."));
+		log.info("Validando funcionário id {}: ", lancamentoDto.getUsuarioId());
+		Optional<Usuario> usuario = this.usuarioService.buscarPorId(lancamentoDto.getUsuarioId());
+		if (!usuario.isPresent()) {
+			result.addError(new ObjectError("usuario", "Usuário não encontrado. ID inexistente."));
 		}
 	}
 
@@ -257,8 +257,9 @@ public class LancamentoController {
 		lancamentoDto.setData(this.dateFormat.format(lancamento.getData()));
 		lancamentoDto.setTipo(lancamento.getTipo().toString());
 		lancamentoDto.setPeriodo(lancamento.getPeriodo());
+		lancamentoDto.setDiscipina(lancamento.getDisciplina());
 		lancamentoDto.setNota(lancamento.getNota());
-		lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getId());
+		lancamentoDto.setUsuarioId(lancamento.getUsuario().getId());
 
 		return lancamentoDto;
 	}
@@ -282,11 +283,12 @@ public class LancamentoController {
 				result.addError(new ObjectError("lancamento", "Lançamento não encontrado."));
 			}
 		} else {
-			lancamento.setFuncionario(new Funcionario());
-			lancamento.getFuncionario().setId(lancamentoDto.getFuncionarioId());
+			lancamento.setUsuario(new Usuario());
+			lancamento.getUsuario().setId(lancamentoDto.getUsuarioId());
 		}
 
 		lancamento.setPeriodo(lancamentoDto.getPeriodo());
+		lancamento.setDisciplina(lancamentoDto.getDiscipina());
 		lancamento.setNota(lancamentoDto.getNota());
 		lancamento.setData(this.dateFormat.parse(lancamentoDto.getData()));
 

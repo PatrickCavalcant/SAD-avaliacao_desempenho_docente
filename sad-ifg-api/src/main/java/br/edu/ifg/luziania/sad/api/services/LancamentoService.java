@@ -13,11 +13,11 @@ public interface LancamentoService {
 	/**
 	 * Retorna uma lista paginada de lançamentos de um determinado funcionário.
 	 * 
-	 * @param funcionarioId
+	 * @param usuarioId
 	 * @param pageRequest
 	 * @return Page<Lancamento>
 	 */
-	Page<Lancamento> buscarPorFuncionarioId(Long funcionarioId, PageRequest pageRequest);
+	Page<Lancamento> buscarPorUsuarioId(Long usuarioId, PageRequest pageRequest);
 	
 	/**
 	 * Retorna um lançamento por ID.
@@ -43,18 +43,18 @@ public interface LancamentoService {
 	void remover(Long id);
 
 	/**
-	 * Retorna o último lançamento por ID de funcionário.
+	 * Retorna o último lançamento por ID de usuário.
 	 *
-	 * @param funcionarioId
+	 * @param usuarioId
 	 * @return Optional<Lancamento>
 	 */
-    Optional<Lancamento> buscarUltimoPorFuncionarioId(Long funcionarioId);
+    Optional<Lancamento> buscarUltimoPorUsuarioId(Long usuarioId);
 
 	/**
-	 * Retorna uma lista com todos os lançamentos de um determinado funcionário.
+	 * Retorna uma lista com todos os lançamentos de um determinado usuário.
 	 *
-	 * @param funcionarioId
+	 * @param usuarioId
 	 * @return List<Lancamento>
 	 */
-    List<Lancamento> buscarTodosPorFuncionarioId(Long funcionarioId);
+    List<Lancamento> buscarTodosPorUsuarioId(Long usuarioId);
 }

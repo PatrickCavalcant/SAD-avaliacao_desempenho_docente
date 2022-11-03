@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.edu.ifg.luziania.sad.api.repositories.FuncionarioRepository;
-import br.edu.ifg.luziania.sad.api.entities.Funcionario;
+import br.edu.ifg.luziania.sad.api.repositories.UsuarioRepository;
+import br.edu.ifg.luziania.sad.api.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +30,7 @@ public class JwtTokenUtil {
 	private Long expiration;
 
 	@Autowired
-	private FuncionarioRepository funcionarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	/**
 	 * Obtém o username (email) contido no token JWT.
@@ -101,14 +101,14 @@ public class JwtTokenUtil {
 	 * @return String
 	 */
 	public String obterToken(UserDetails userDetails) {
-		Funcionario funcionario = funcionarioRepository.findByEmail(userDetails.getUsername());
+		Usuario usuario = usuarioRepository.findByEmail(userDetails.getUsername());
 		Map<String, Object> claims = new HashMap<>();
 		claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
 		userDetails.getAuthorities().forEach(authority -> claims.put(CLAIM_KEY_ROLE, authority.getAuthority()));
 		claims.put(CLAIM_KEY_CREATED, new Date());
-		if (funcionario != null) {
-			claims.put("id", funcionario.getId());
-			claims.put("empresaId", funcionario.getEmpresa().getId());
+		if (usuario != null) {
+			claims.put("id", usuario.getId());
+			claims.put("empresaId", usuario.getEmpresa().getId());
 		}
 
 		return gerarToken(claims);
