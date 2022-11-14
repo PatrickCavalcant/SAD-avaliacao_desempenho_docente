@@ -10,7 +10,9 @@ CREATE TABLE `disciplina` (
   `id` bigint(20) NOT NULL,
   `data_atualizacao` datetime NOT NULL,
   `data_criacao` datetime NOT NULL,
+  `professor_id` bigint(20) NOT NULL,
   `professor` varchar(255) NOT NULL,
+  `aluno_id` bigint(20) NOT NULL,
   `aluno` varchar(255) NOT NULL,
   `disciplina` varchar(255),
   `periodo` varchar(255),
@@ -64,7 +66,10 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `disciplina`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK4cm1kg523jlopyexjbmi6y54d` (`empresa_id`);
+  ADD KEY `FK4cm1kg523jlopyexjbmi6y54d` (`empresa_id`),
+  ADD KEY `FK4cm1kg523jlopyexjbmi6y54e` (`professor_id`),
+  ADD KEY `FK4cm1kg523jlopyexjbmi6y54a` (`aluno_id`);
+
 
 --
 -- Indexes for table `lancamento`
@@ -107,7 +112,10 @@ ALTER TABLE `usuario`
 -- Constraints for table `disciplina`
 --
 ALTER TABLE `disciplina`
-  ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54d` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`);
+  ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54d` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
+  ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54e` FOREIGN KEY (`professor_id`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `FK4cm1kg523jlopyexjbmi6y54a` FOREIGN KEY (`aluno_id`) REFERENCES `usuario` (`id`);
+
 
 --
 -- Constraints for table `lancamento`
