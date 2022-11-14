@@ -1,6 +1,7 @@
 package br.edu.ifg.luziania.sad.api.dtos;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -8,21 +9,32 @@ import java.util.Optional;
 
 public class DisciplinaDto {
 
-	private Long id;
+	private Optional<Long> id = Optional.empty();
+	private String professor_id;
+	private String aluno_id;
 	private String professor;
 	private String aluno;
 	private String disciplina;
 	private String periodo;
+	private String cnpj;
 
 	public DisciplinaDto() {
 	}
 
-	public Long getId() {
+	public Optional<Long> getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Optional<Long> id) {
 		this.id = id;
+	}
+
+	public String getProfessorId() {
+		return professor_id;
+	}
+
+	public void setProfessorId(String professor_id) {
+		this.professor_id = professor_id;
 	}
 
 	@NotEmpty(message = "Nome do professor não pode ser vazio.")
@@ -33,6 +45,14 @@ public class DisciplinaDto {
 
 	public void setProfessor(String professor) {
 		this.professor = professor;
+	}
+
+	public String getAlunoId() {
+		return aluno_id;
+	}
+
+	public void setAlunoId(String aluno_id) {
+		this.aluno_id = aluno_id;
 	}
 
 	@NotEmpty(message = "Nome do aluno não pode ser vazio.")
@@ -63,12 +83,21 @@ public class DisciplinaDto {
 		this.periodo = periodo;
 	}
 
+	@NotEmpty(message = "CNPJ não pode ser vazio.")
+	@CNPJ(message="CNPJ inválido.")
+	public String getCnpj() {
+		return cnpj;
+	}
 
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 
 	@Override
 	public String toString() {
-		return "DisciplinaDto [id=" + id + ", professor=" + professor + ", aluno=" + aluno
-				+ ", disciplina=" + disciplina + ", periodo=" + periodo +"]";
+		return "DisciplinaDto [id=" + id + ", professor_id=" + professor_id + ", professor=" + professor
+				+ ", aluno=" + aluno + ", aluno_id=" + aluno_id
+				+ ", disciplina=" + disciplina + ", periodo=" + periodo + ", cnpj=" + cnpj + "]";
 	}
 
 }

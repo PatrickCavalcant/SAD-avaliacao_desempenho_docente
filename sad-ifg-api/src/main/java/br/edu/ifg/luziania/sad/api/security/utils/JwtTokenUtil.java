@@ -109,6 +109,7 @@ public class JwtTokenUtil {
 		if (usuario != null) {
 			claims.put("id", usuario.getId());
 			claims.put("empresaId", usuario.getEmpresa().getId());
+
 		}
 
 		return gerarToken(claims);
