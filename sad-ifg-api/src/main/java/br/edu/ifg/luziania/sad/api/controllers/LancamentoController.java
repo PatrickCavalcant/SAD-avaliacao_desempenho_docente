@@ -257,9 +257,10 @@ public class LancamentoController {
 		lancamentoDto.setData(this.dateFormat.format(lancamento.getData()));
 		lancamentoDto.setTipo(lancamento.getTipo().toString());
 		lancamentoDto.setPeriodo(lancamento.getPeriodo());
-		lancamentoDto.setDiscipina(lancamento.getDisciplina());
+		lancamentoDto.setDisciplina(lancamento.getDisciplina());
 		lancamentoDto.setNota(lancamento.getNota());
 		lancamentoDto.setUsuarioId(lancamento.getUsuario().getId());
+		lancamentoDto.setAlunoId(lancamento.getAlunoId());
 
 		return lancamentoDto;
 	}
@@ -288,9 +289,10 @@ public class LancamentoController {
 		}
 
 		lancamento.setPeriodo(lancamentoDto.getPeriodo());
-		lancamento.setDisciplina(lancamentoDto.getDiscipina());
+		lancamento.setDisciplina(lancamentoDto.getDisciplina());
 		lancamento.setNota(lancamentoDto.getNota());
 		lancamento.setData(this.dateFormat.parse(lancamentoDto.getData()));
+		lancamento.setAlunoId(lancamentoDto.getAlunoId());
 
 		if (EnumUtils.isValidEnum(TipoEnum.class, lancamentoDto.getTipo())) {
 			lancamento.setTipo(TipoEnum.valueOf(lancamentoDto.getTipo()));

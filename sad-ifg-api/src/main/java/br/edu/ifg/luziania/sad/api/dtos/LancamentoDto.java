@@ -10,9 +10,10 @@ public class LancamentoDto {
 	private String data;
 	private String tipo;
 	private String periodo;
-	private String discipina;
+	private String disciplina;
 	private String nota;
 	private Long usuarioId;
+	private String aluno_id;
 
 	public LancamentoDto() {
 	}
@@ -50,12 +51,12 @@ public class LancamentoDto {
 		this.periodo = periodo;
 	}
 
-	public String getDiscipina() {
-		return discipina;
+	public String getDisciplina() {
+		return disciplina;
 	}
 
-	public void setDiscipina(String discipina) {
-		this.discipina = discipina;
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
 	}
 
 	public String getNota() {
@@ -64,6 +65,14 @@ public class LancamentoDto {
 
 	public void setNota(String nota) {
 		this.nota = nota;
+	}
+
+	public String getAlunoId() {
+		return aluno_id;
+	}
+
+	public void setAlunoId(String aluno_id) {
+		this.aluno_id = aluno_id;
 	}
 
 	public Long getUsuarioId() {
@@ -76,8 +85,10 @@ public class LancamentoDto {
 
 	@Override
 	public String toString() {
-		return "LancamentoDto [id=" + id + ", data=" + data + ", tipo=" + tipo + ", periodo=" + periodo
-				+ ", nota=" + nota + ", usuarioId=" + usuarioId + "]";
+		return "LancamentoDto [id=" + id + ", data=" + data + ", tipo=" + tipo
+				+ ", periodo=" + periodo + ", disciplina=" + disciplina
+				+ ", nota=" + nota + ", usuarioId=" + usuarioId
+				+ ", aluno_id" + aluno_id + "]";
 	}
 	
 }

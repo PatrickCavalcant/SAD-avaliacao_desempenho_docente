@@ -22,6 +22,8 @@ public class Lancamento implements Serializable {
 	private Date dataAtualizacao;
 	private TipoEnum tipo;
 	private Usuario usuario;
+	private String aluno_id;
+
 
 	public Lancamento() {
 	}
@@ -109,7 +111,15 @@ public class Lancamento implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
+	public String getAlunoId() {
+		return aluno_id;
+	}
+
+	public void setAlunoId(String aluno_id) {
+		this.aluno_id = aluno_id;
+	}
+
 	@PreUpdate
     public void preUpdate() {
         dataAtualizacao = new Date();
@@ -124,9 +134,10 @@ public class Lancamento implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Lancamento [id=" + id + ", data=" + data + ", periodo=" + periodo + ", nota=" + nota
-				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo
-				+ ", usuario=" + usuario + "]";
+		return "Lancamento [id=" + id + ", data=" + data + ", periodo=" + periodo
+				+ ", disciplina=" + disciplina + ", nota=" + nota
+				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao
+				+ ", tipo=" + tipo + ", usuario=" + usuario + ", aluno_id=" + aluno_id + "]";
 	}
 
 }
