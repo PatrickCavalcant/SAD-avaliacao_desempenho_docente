@@ -45,6 +45,7 @@ CREATE TABLE `lancamento` (
   `disciplina` varchar(255) DEFAULT NULL,
   `nota` varchar(255) DEFAULT NULL,
   `tipo` varchar(255) NOT NULL,
+  `aluno_id` bigint(20),
   `usuario_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -76,7 +77,9 @@ ALTER TABLE `disciplina`
 --
 ALTER TABLE `lancamento`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK46i4k5vl8wah7feutye9kbpi4` (`usuario_id`);
+  ADD KEY `FK46i4k5vl8wah7feutye9kbpi4` (`usuario_id`),
+  ADD KEY `FK46i4k5vl8wah7feutye9kbpia` (`aluno_id`);
+
 
 --
 -- AUTO_INCREMENT for table `empresa`
@@ -121,6 +124,8 @@ ALTER TABLE `disciplina`
 -- Constraints for table `lancamento`
 --
 ALTER TABLE `lancamento`
-  ADD CONSTRAINT `FK46i4k5vl8wah7feutye9kbpi4` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `FK46i4k5vl8wah7feutye9kbpi4` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `FK46i4k5vl8wah7feutye9kbpia` FOREIGN KEY (`aluno_id`) REFERENCES `usuario` (`id`);
+
 
 
