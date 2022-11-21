@@ -35,6 +35,15 @@ Para executar o cliente (após a execução da API RESTful), execute os seguinte
 cd ponto-inteligente-client
 npm install -g @angular/cli
 npm install
+```
+
+Será necessário a instalação do JQuery:
+```
+npm install --save-dev @types/jquery
+npm install --save jquery
+```
+Após basta iniciar a aplicação:
+```
 npm start
 ```
 Acesse a aplicação em [http://localhost:4200](http://localhost:4200)  
