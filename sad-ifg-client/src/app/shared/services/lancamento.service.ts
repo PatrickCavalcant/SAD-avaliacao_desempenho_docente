@@ -12,6 +12,7 @@ export class LancamentoService {
   private readonly PATH: string = 'lancamentos';
   private readonly PATH_ULTIMO_LANC = '/usuario/{usuarioId}/ultimo';
   private readonly PATH_LANCAMENTOS = '/usuario/{usuarioId}';
+  private readonly PATH_LANCAMENTOS_ALUNO = '/aluno/{alunoId}';
   private readonly PATH_TODOS_LANC = '/usuario/{usuarioId}/todos';
 
   constructor(
@@ -42,6 +43,21 @@ export class LancamentoService {
             '{usuarioId}', this.httpUtil.obterIdUsuario()),
         this.httpUtil.headers()
     );
+  }
+
+  listarLancamentosPorAluno(
+      alunoId: string,
+      pagina: number, 
+      ordem: string, 
+      direcao: string): Observable<any> {
+
+    const url: string = env.baseApiUrl + this.PATH + 
+      this.PATH_LANCAMENTOS_ALUNO.replace('{alunoId}', alunoId);
+    
+    const params: string = '?pag=' + pagina +
+      '&ord=' + ordem + '&dir=' + direcao;
+    
+    return this.http.get(url + params, this.httpUtil.headers());
   }
 
   listarLancamentosPorUsuario(
