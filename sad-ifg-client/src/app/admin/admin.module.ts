@@ -31,7 +31,8 @@ import {
   HttpUtilService,
   LancamentoService,
   PtBrMatPaginatorIntl,
-  UsuarioService
+  UsuarioService, 
+  DisciplinaService
 } from '../shared';
 
 import {
@@ -80,6 +81,7 @@ import { AdminGuard } from './services';
     HttpUtilService,
     MatPaginatorIntl,
     UsuarioService,
+    DisciplinaService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: STEPPER_GLOBAL_OPTIONS,
       useValue: {displayDefaultIndicatorType: false},},

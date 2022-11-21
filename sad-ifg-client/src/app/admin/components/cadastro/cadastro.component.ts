@@ -9,7 +9,8 @@ import * as moment from 'moment';
 import {
   Lancamento,
   Tipo,
-  LancamentoService
+  LancamentoService,
+  HttpUtilService
 } from '../../../shared';
 
 @Component({
@@ -25,12 +26,15 @@ export class CadastroComponent implements OnInit {
   minutos: string[];
   tipos: string[];
   nota: Number;
+  disciplina: string
+  usuarioLogadoId: string;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private router: Router,
+    private httpUtil: HttpUtilService,
     private lancamentoService: LancamentoService) { }
     private _formBuilder: FormBuilder
     
@@ -43,6 +47,8 @@ export class CadastroComponent implements OnInit {
   		Tipo.AUTO_AVALIACAO,
   		Tipo.AVALIACAO_SUPERIOR
   	];
+    this.usuarioLogadoId = this.httpUtil.obterIdUsuario();
+
   }
 
   gerarForm() {
@@ -99,8 +105,10 @@ export class CadastroComponent implements OnInit {
         data.format('YYYY-MM-DD HH:mm:ss'),
         dados.tipo,
         this.nota,
+        this.disciplina,
         '',
-        this.usuarioId
+        this.usuarioId,
+        this.usuarioLogadoId
       );
   }
 

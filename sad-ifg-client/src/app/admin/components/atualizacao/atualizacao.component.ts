@@ -8,7 +8,8 @@ import * as moment from 'moment';
 import {
   Lancamento,
   Tipo,
-  LancamentoService
+  LancamentoService,
+  HttpUtilService
 } from '../../../shared';
 
 @Component({
@@ -19,6 +20,7 @@ import {
 export class AtualizacaoComponent implements OnInit {
 
   form: FormGroup;
+  usuarioLogadoId: string;
   horas: string[];
   minutos: string[];
   tipos: string[];
@@ -32,6 +34,7 @@ export class AtualizacaoComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private router: Router,
+    private httpUtil: HttpUtilService,
     private lancamentoService: LancamentoService) { }
 
   ngOnInit() {
@@ -47,6 +50,8 @@ export class AtualizacaoComponent implements OnInit {
 
     this.gerarForm();
     this.obterDadosLancamento();
+    this.usuarioLogadoId = this.httpUtil.obterIdUsuario();
+
   }
 
   obterDadosLancamento() {
@@ -60,6 +65,7 @@ export class AtualizacaoComponent implements OnInit {
           this.form.get('tipo').setValue(dados.data.tipo);
           this.form.get('nota').setValue(dados.data.nota);
           this.form.get('periodo').setValue(dados.data.periodo);
+
         },
         err => {
           let msg: string = "Erro obtendo lançamento";
@@ -127,7 +133,8 @@ export class AtualizacaoComponent implements OnInit {
         dados.nota,
         dados.periodo,
         this.usuarioId,
-        this.lancamentoId
+        this.lancamentoId,
+        this.usuarioLogadoId
       );
   }
 
