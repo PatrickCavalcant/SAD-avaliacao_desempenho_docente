@@ -8,10 +8,10 @@ import java.util.Date;
 import java.util.Optional;
 
 import br.edu.ifg.luziania.sad.api.dtos.LancamentoDto;
-import br.edu.ifg.luziania.sad.api.entities.Funcionario;
+import br.edu.ifg.luziania.sad.api.entities.Usuario;
 import br.edu.ifg.luziania.sad.api.entities.Lancamento;
 import br.edu.ifg.luziania.sad.api.enums.TipoEnum;
-import br.edu.ifg.luziania.sad.api.services.FuncionarioService;
+import br.edu.ifg.luziania.sad.api.services.UsuarioService;
 import br.edu.ifg.luziania.sad.api.services.LancamentoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,10 +44,10 @@ public class LancamentoControllerTest {
 	private LancamentoService lancamentoService;
 	
 	@MockBean
-	private FuncionarioService funcionarioService;
+	private UsuarioService usuarioService;
 	
 	private static final String URL_BASE = "/api/lancamentos/";
-	private static final Long ID_FUNCIONARIO = 1L;
+	private static final Long ID_USUARIO = 1L;
 	private static final Long ID_LANCAMENTO = 1L;
 	private static final String TIPO = TipoEnum.AVALIACAO_ALUNO.name();
 	private static final Date DATA = new Date();
@@ -58,7 +58,7 @@ public class LancamentoControllerTest {
 	@WithMockUser
 	public void testCadastrarLancamento() throws Exception {
 		Lancamento lancamento = obterDadosLancamento();
-		BDDMockito.given(this.funcionarioService.buscarPorId(Mockito.anyLong())).willReturn(Optional.of(new Funcionario()));
+		BDDMockito.given(this.usuarioService.buscarPorId(Mockito.anyLong())).willReturn(Optional.of(new Usuario()));
 		BDDMockito.given(this.lancamentoService.persistir(Mockito.any(Lancamento.class))).willReturn(lancamento);
 
 		mvc.perform(MockMvcRequestBuilders.post(URL_BASE)
@@ -69,21 +69,21 @@ public class LancamentoControllerTest {
 				.andExpect(jsonPath("$.data.id").value(ID_LANCAMENTO))
 				.andExpect(jsonPath("$.data.tipo").value(TIPO))
 				.andExpect(jsonPath("$.data.data").value(this.dateFormat.format(DATA)))
-				.andExpect(jsonPath("$.data.funcionarioId").value(ID_FUNCIONARIO))
+				.andExpect(jsonPath("$.data.usuarioId").value(ID_USUARIO))
 				.andExpect(jsonPath("$.errors").isEmpty());
 	}
 	
 	@Test
 	@WithMockUser
-	public void testCadastrarLancamentoFuncionarioIdInvalido() throws Exception {
-		BDDMockito.given(this.funcionarioService.buscarPorId(Mockito.anyLong())).willReturn(Optional.empty());
+	public void testCadastrarLancamentoUsuarioIdInvalido() throws Exception {
+		BDDMockito.given(this.usuarioService.buscarPorId(Mockito.anyLong())).willReturn(Optional.empty());
 
 		mvc.perform(MockMvcRequestBuilders.post(URL_BASE)
 				.content(this.obterJsonRequisicaoPost())
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$.errors").value("Funcionário não encontrado. ID inexistente."))
+				.andExpect(jsonPath("$.errors").value("Usuário não encontrado. ID inexistente."))
 				.andExpect(jsonPath("$.data").isEmpty());
 	}
 	
@@ -112,7 +112,7 @@ public class LancamentoControllerTest {
 		lancamentoDto.setId(null);
 		lancamentoDto.setData(this.dateFormat.format(DATA));
 		lancamentoDto.setTipo(TIPO);
-		lancamentoDto.setFuncionarioId(ID_FUNCIONARIO);
+		lancamentoDto.setUsuarioId(ID_USUARIO);
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(lancamentoDto);
 	}
@@ -122,8 +122,8 @@ public class LancamentoControllerTest {
 		lancamento.setId(ID_LANCAMENTO);
 		lancamento.setData(DATA);
 		lancamento.setTipo(TipoEnum.valueOf(TIPO));
-		lancamento.setFuncionario(new Funcionario());
-		lancamento.getFuncionario().setId(ID_FUNCIONARIO);
+		lancamento.setUsuario(new Usuario());
+		lancamento.getUsuario().setId(ID_USUARIO);
 		return lancamento;
 	}	
 
