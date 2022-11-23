@@ -1,225 +1,224 @@
 <form formGroup="form" class="content" novalidate >
-    <mat-list role="list">
+    <!-- <mat-list role="list">
       <mat-list-item class="right">
         <a mat-button color="warn" routerLink="/avaliacao/listagem">
             Histórico de Notas
         </a>
       </mat-list-item>
-    </mat-list>
-        <mat-horizontal-stepper linear>
-            <mat-step>
-                <mat-list> 
-                    <mat-list-item>
-                        <strong>Avaliador:&nbsp;&nbsp;</strong>
-                        <input matInput type="text" formControlName="userLogado" #userLogado [(value)]="usuarioLogadoId" *ngFor="let usuario of usuariosLogado"  [value]="usuario.nome" disabled=""/>
-                    </mat-list-item>
-                    <mat-list-item>
-                        <strong>Selecione a Disciplina:&nbsp;&nbsp;</strong>
-                        <mat-form-field>
-                            <mat-select
-                                placeholder="disciplina"
-                                formControlName="funcs"
-                                [(value)]="disciplinaId" 
-                                required
-                                #elementDisciplina
+    </mat-list> -->
+    <mat-horizontal-stepper linear>
+        <mat-step>
+            <mat-list> 
+                <mat-list-item>
+                    <strong>Avaliador:&nbsp;&nbsp;</strong>
+                    <input matInput type="text" formControlName="userLogado" #userLogado [(value)]="usuarioLogadoId" *ngFor="let usuario of usuariosLogado"  [value]="usuario.nome" disabled=""/>
+                </mat-list-item>
+                <mat-list-item>
+                    <strong>Selecione a Disciplina:&nbsp;&nbsp;</strong>
+                    <mat-form-field>
+                        <mat-select
+                            placeholder="disciplina"
+                            formControlName="funcs"
+                            [(value)]="disciplinaId" 
+                            required
+                            #elementDisciplina
+                            >
+                            <mat-option 
+                                *ngFor="let disciplina of disciplinas" 
+                                [value]="disciplina.disciplina"
+                                (click)="obterProfessor()"
                                 >
-                                <mat-option 
-                                    *ngFor="let disciplina of disciplinas" 
-                                    [value]="disciplina.disciplina"
-                                    (click)="obterProfessor()"
-                                    >
-                                    {{ disciplina.disciplina }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <!-- <input matInput type="text" formControlName="funcs" [(value)]="usuarioId" *ngFor="let disciplina of disciplinas"  [value]="disciplina.disciplina" disabled=""/> -->
-                        <strong>Campus:</strong>&nbsp;Luziânia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Data:</strong>&nbsp;{{ dataAtual }}
-
-                    </mat-list-item>
-                    <mat-list-item>
-                        <strong>Professor:&nbsp;&nbsp;</strong>
-                        <input matInput type="text" formControlName="profs" [(value)]="professorId" *ngFor="let disciplina of professores"  [value]="disciplina.professor" disabled=""/>
-                    </mat-list-item>
-                    <mat-list-item>
-                        <strong>
-                            De acordo com a Res. Consup IFG nº 040/2018, Regimento Geral do IFG, 
-                            Art. 190-193,198-201, avalie a atuação do Docente na avaliação a seguir, atuante em 2022, 
-                            atribuindo-lhe nota numa escala de 0 (zero) à 10(dez).
-                        </strong>
-                    </mat-list-item>
-                </mat-list>
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 1:</strong>
-                <p>Plano de ensino: O/a professor/a apresentou e discutiu com a turma, no início do semestre, o programa da disciplina?</p>
-                <strong>Nota: </strong>
-                <input name="nota1" type="radio" id="nota1Value0" [value]=0 />0 
-                <input name="nota1" type="radio" id="nota1Value1" [value]=1 />1 
-                <input name="nota1" type="radio" id="nota1Value2" [value]=2 />2 
-                <input name="nota1" type="radio" id="nota1Value3" [value]=3 />3 
-                <input name="nota1" type="radio" id="nota1Value4" [value]=4 />4 
-                <input name="nota1" type="radio" id="nota1Value5" [value]=5 />5 
-                <input name="nota1" type="radio" id="nota1Value6" [value]=6 />6 
-                <input name="nota1" type="radio" id="nota1Value7" [value]=7 />7 
-                <input name="nota1" type="radio" id="nota1Value8" [value]=8 />8 
-                <input name="nota1" type="radio" id="nota1Value9" [value]=9 />9 
-                <input name="nota1" type="radio" id="nota1Value10" [value]=10 />10 
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 2:</strong>
-                <p>Assiduidade e pontualidade: Esteve presente regularmente às atividades e cumpre horários de início e fim em sala de aula?</p>
-                <strong>Nota: </strong>
-                <input name="nota2" type="radio" id="nota2Value0" [value]=0 />0 
-                <input name="nota2" type="radio" id="nota2Value1" [value]=1 />1 
-                <input name="nota2" type="radio" id="nota2Value2" [value]=2 />2 
-                <input name="nota2" type="radio" id="nota2Value3" [value]=3 />3 
-                <input name="nota2" type="radio" id="nota2Value4" [value]=4 />4 
-                <input name="nota2" type="radio" id="nota2Value5" [value]=5 />5 
-                <input name="nota2" type="radio" id="nota2Value6" [value]=6 />6 
-                <input name="nota2" type="radio" id="nota2Value7" [value]=7 />7 
-                <input name="nota2" type="radio" id="nota2Value8" [value]=8 />8 
-                <input name="nota2" type="radio" id="nota2Value9" [value]=9 />9 
-                <input name="nota2" type="radio" id="nota2Value10" [value]=10 />10              
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 3:</strong>
-                <p>Dedicação: Demonstra interesse e disponibilidade em auxiliar e sanar as dúvidas dos(as) alunos(as) em sala de aula?</p>
-                <strong>Nota: </strong>
-                <input name="nota3" type="radio" id="nota3Value0" [value]=0 />0 
-                <input name="nota3" type="radio" id="nota3Value1" [value]=1 />1 
-                <input name="nota3" type="radio" id="nota3Value2" [value]=2 />2 
-                <input name="nota3" type="radio" id="nota3Value3" [value]=3 />3 
-                <input name="nota3" type="radio" id="nota3Value4" [value]=4 />4 
-                <input name="nota3" type="radio" id="nota3Value5" [value]=5 />5 
-                <input name="nota3" type="radio" id="nota3Value6" [value]=6 />6 
-                <input name="nota3" type="radio" id="nota3Value7" [value]=7 />7 
-                <input name="nota3" type="radio" id="nota3Value8" [value]=8 />8 
-                <input name="nota3" type="radio" id="nota3Value9" [value]=9 />9 
-                <input name="nota3" type="radio" id="nota3Value10" [value]=10 />10 	
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 4:</strong>
-                <p>Didática: Demonstra preparo para ministrar os conteúdos previstos no plano de ensino?</p>
-                <strong>Nota: </strong>
-                <input name="nota4" type="radio" id="nota4Value0" [value]=0 />0 
-                <input name="nota4" type="radio" id="nota4Value1" [value]=1 />1 
-                <input name="nota4" type="radio" id="nota4Value2" [value]=2 />2 
-                <input name="nota4" type="radio" id="nota4Value3" [value]=3 />3 
-                <input name="nota4" type="radio" id="nota4Value4" [value]=4 />4 
-                <input name="nota4" type="radio" id="nota4Value5" [value]=5 />5 
-                <input name="nota4" type="radio" id="nota4Value6" [value]=6 />6 
-                <input name="nota4" type="radio" id="nota4Value7" [value]=7 />7 
-                <input name="nota4" type="radio" id="nota4Value8" [value]=8 />8 
-                <input name="nota4" type="radio" id="nota4Value9" [value]=9 />9 
-                <input name="nota4" type="radio" id="nota4Value10" [value]=10 />10 
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 5:</strong>
-                <p>Professor/aluno: Demonstra ser acessível, cordial e zela pela harmonia do ambiente e respeito durante as atividades?</p>
-                <strong>Nota: </strong>
-                <input name="nota5" type="radio" id="nota5Value0" [value]=0 />0 
-                <input name="nota5" type="radio" id="nota5Value1" [value]=1 />1 
-                <input name="nota5" type="radio" id="nota5Value2" [value]=2 />2 
-                <input name="nota5" type="radio" id="nota5Value3" [value]=3 />3 
-                <input name="nota5" type="radio" id="nota5Value4" [value]=4 />4 
-                <input name="nota5" type="radio" id="nota5Value5" [value]=5 />5 
-                <input name="nota5" type="radio" id="nota5Value6" [value]=6 />6 
-                <input name="nota5" type="radio" id="nota5Value7" [value]=7 />7 
-                <input name="nota5" type="radio" id="nota5Value8" [value]=8 />8 
-                <input name="nota5" type="radio" id="nota5Value9" [value]=9 />9 
-                <input name="nota5" type="radio" id="nota5Value10" [value]=10 />10 
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 6:</strong>
-                <p>Atendimento ao aluno: Informa os horários de atendimento extraclasse e demonstra interesse e disp. no atendimento ao aluno?</p>
-                <strong>Nota: </strong>
-                <input name="nota6" type="radio" id="nota6Value0" [value]=0 />0 
-                <input name="nota6" type="radio" id="nota6Value1" [value]=1 />1 
-                <input name="nota6" type="radio" id="nota6Value2" [value]=2 />2 
-                <input name="nota6" type="radio" id="nota6Value3" [value]=3 />3 
-                <input name="nota6" type="radio" id="nota6Value4" [value]=4 />4 
-                <input name="nota6" type="radio" id="nota6Value5" [value]=5 />5 
-                <input name="nota6" type="radio" id="nota6Value6" [value]=6 />6 
-                <input name="nota6" type="radio" id="nota6Value7" [value]=7 />7 
-                <input name="nota6" type="radio" id="nota6Value8" [value]=8 />8 
-                <input name="nota6" type="radio" id="nota6Value9" [value]=9 />9 
-                <input name="nota6" type="radio" id="nota6Value10" [value]=10 />10 
-            </mat-step>	
-            <mat-step state="notasIcon">
-                <strong>Questão 7:</strong>
-                <p>Recursos didáticos: Emprega diferentes recursos de aprendizagem como: quadro/giz, vídeo, slides, visitas técnicas, etc?</p>
-                <strong>Nota: </strong>
-                <input name="nota7" type="radio" id="nota7Value0" [value]=0 />0 
-                <input name="nota7" type="radio" id="nota7Value1" [value]=1 />1 
-                <input name="nota7" type="radio" id="nota7Value2" [value]=2 />2 
-                <input name="nota7" type="radio" id="nota7Value3" [value]=3 />3 
-                <input name="nota7" type="radio" id="nota7Value4" [value]=4 />4 
-                <input name="nota7" type="radio" id="nota7Value5" [value]=5 />5 
-                <input name="nota7" type="radio" id="nota7Value6" [value]=6 />6 
-                <input name="nota7" type="radio" id="nota7Value7" [value]=7 />7 
-                <input name="nota7" type="radio" id="nota7Value8" [value]=8 />8 
-                <input name="nota7" type="radio" id="nota7Value9" [value]=9 />9 
-                <input name="nota7" type="radio" id="nota7Value10" [value]=10 />10 
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 8:</strong>
-                <p>Avaliação de aprendizagem: Utiliza diferentes métodos de avaliação: prova, pesquisa/trabalho, lista de exercícios, etc?</p>
-                <strong>Nota: </strong>
-                <input name="nota8" type="radio" id="nota8Value0" [value]=0 />0 
-                <input name="nota8" type="radio" id="nota8Value1" [value]=1 />1 
-                <input name="nota8" type="radio" id="nota8Value2" [value]=2 />2 
-                <input name="nota8" type="radio" id="nota8Value3" [value]=3 />3 
-                <input name="nota8" type="radio" id="nota8Value4" [value]=4 />4 
-                <input name="nota8" type="radio" id="nota8Value5" [value]=5 />5 
-                <input name="nota8" type="radio" id="nota8Value6" [value]=6 />6 
-                <input name="nota8" type="radio" id="nota8Value7" [value]=7 />7 
-                <input name="nota8" type="radio" id="nota8Value8" [value]=8 />8 
-                <input name="nota8" type="radio" id="nota8Value9" [value]=9 />9 
-                <input name="nota8" type="radio" id="nota8Value10" [value]=10 />10 	
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 9:</strong>
-                <p>Avaliações: Deixa claro os conteúdos que serão avaliados, dosando os conteúdos cobrados entre uma avaliação e outra?</p>
-                <strong>Nota: </strong>
-                <input name="nota9" type="radio" id="nota9Value0" [value]=0 />0 
-                <input name="nota9" type="radio" id="nota9Value1" [value]=1 />1 
-                <input name="nota9" type="radio" id="nota9Value2" [value]=2 />2 
-                <input name="nota9" type="radio" id="nota9Value3" [value]=3 />3 
-                <input name="nota9" type="radio" id="nota9Value4" [value]=4 />4 
-                <input name="nota9" type="radio" id="nota9Value5" [value]=5 />5 
-                <input name="nota9" type="radio" id="nota9Value6" [value]=6 />6 
-                <input name="nota9" type="radio" id="nota9Value7" [value]=7 />7 
-                <input name="nota9" type="radio" id="nota9Value8" [value]=8 />8 
-                <input name="nota9" type="radio" id="nota9Value9" [value]=9 />9 
-                <input name="nota9" type="radio" id="nota9Value10" [value]=10 />10 		
-            </mat-step>
-            <mat-step state="notasIcon">
-                <strong>Questão 10:</strong>
-                <p>Devolutiva: As avaliações são corrigidas, comentadas e devolvidas em tempo hábil?</p>
-                <strong>Nota: </strong>
-                <input name="nota10" type="radio" id="nota10Value0" [value]=0 />0 
-                <input name="nota10" type="radio" id="nota10Value1" [value]=1 />1 
-                <input name="nota10" type="radio" id="nota10Value2" [value]=2 />2 
-                <input name="nota10" type="radio" id="nota10Value3" [value]=3 />3 
-                <input name="nota10" type="radio" id="nota10Value4" [value]=4 />4 
-                <input name="nota10" type="radio" id="nota10Value5" [value]=5 />5 
-                <input name="nota10" type="radio" id="nota10Value6" [value]=6 />6 
-                <input name="nota10" type="radio" id="nota10Value7" [value]=7 />7 
-                <input name="nota10" type="radio" id="nota10Value8" [value]=8 />8 
-                <input name="nota10" type="radio" id="nota10Value9" [value]=9 />9 
-                <input name="nota10" type="radio" id="nota10Value10" [value]=10 />10 
-            </mat-step>
-            <mat-step state="notasIcon">
-                <p>Deseja realmente enviar esta avaliação?</p>
-                <button mat-raised-button color="primary" (click)="gerarNota()">Enviar</button>	
-                
-            </mat-step>
-               <!-- Substituições de ícones -->
-            <ng-template matStepperIcon="notasIcon">
-                <mat-icon>notes</mat-icon>
-            </ng-template>
-        </mat-horizontal-stepper>
+                                {{ disciplina.disciplina }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- <input matInput type="text" formControlName="funcs" [(value)]="usuarioId" *ngFor="let disciplina of disciplinas"  [value]="disciplina.disciplina" disabled=""/> -->
+                    <strong>Campus:</strong>&nbsp;Luziânia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Data:</strong>&nbsp;{{ dataAtual }}
+                </mat-list-item>
+                <mat-list-item>
+                    <strong>Professor:&nbsp;&nbsp;</strong>
+                    <input matInput type="text" formControlName="profs" [(value)]="professorId" *ngFor="let disciplina of professores"  [value]="disciplina.professor" disabled=""/>
+                </mat-list-item>
+                <mat-list-item>
+                    <strong>
+                        De acordo com a Res. Consup IFG nº 040/2018, Regimento Geral do IFG, 
+                        Art. 190-193,198-201, avalie a atuação do Docente na avaliação a seguir, atuante em 2022, 
+                        atribuindo-lhe nota numa escala de 0 (zero) à 10(dez).
+                    </strong>
+                </mat-list-item>
+            </mat-list>
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 1:</strong>
+            <p>Plano de ensino: O/a professor/a apresentou e discutiu com a turma, no início do semestre, o programa da disciplina?</p>
+            <strong>Nota: </strong>
+            <input name="nota1" type="radio" id="nota1Value0" [value]=0 />0 
+            <input name="nota1" type="radio" id="nota1Value1" [value]=1 />1 
+            <input name="nota1" type="radio" id="nota1Value2" [value]=2 />2 
+            <input name="nota1" type="radio" id="nota1Value3" [value]=3 />3 
+            <input name="nota1" type="radio" id="nota1Value4" [value]=4 />4 
+            <input name="nota1" type="radio" id="nota1Value5" [value]=5 />5 
+            <input name="nota1" type="radio" id="nota1Value6" [value]=6 />6 
+            <input name="nota1" type="radio" id="nota1Value7" [value]=7 />7 
+            <input name="nota1" type="radio" id="nota1Value8" [value]=8 />8 
+            <input name="nota1" type="radio" id="nota1Value9" [value]=9 />9 
+            <input name="nota1" type="radio" id="nota1Value10" [value]=10 />10 
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 2:</strong>
+            <p>Assiduidade e pontualidade: Esteve presente regularmente às atividades e cumpre horários de início e fim em sala de aula?</p>
+            <strong>Nota: </strong>
+            <input name="nota2" type="radio" id="nota2Value0" [value]=0 />0 
+            <input name="nota2" type="radio" id="nota2Value1" [value]=1 />1 
+            <input name="nota2" type="radio" id="nota2Value2" [value]=2 />2 
+            <input name="nota2" type="radio" id="nota2Value3" [value]=3 />3 
+            <input name="nota2" type="radio" id="nota2Value4" [value]=4 />4 
+            <input name="nota2" type="radio" id="nota2Value5" [value]=5 />5 
+            <input name="nota2" type="radio" id="nota2Value6" [value]=6 />6 
+            <input name="nota2" type="radio" id="nota2Value7" [value]=7 />7 
+            <input name="nota2" type="radio" id="nota2Value8" [value]=8 />8 
+            <input name="nota2" type="radio" id="nota2Value9" [value]=9 />9 
+            <input name="nota2" type="radio" id="nota2Value10" [value]=10 />10              
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 3:</strong>
+            <p>Dedicação: Demonstra interesse e disponibilidade em auxiliar e sanar as dúvidas dos(as) alunos(as) em sala de aula?</p>
+            <strong>Nota: </strong>
+            <input name="nota3" type="radio" id="nota3Value0" [value]=0 />0 
+            <input name="nota3" type="radio" id="nota3Value1" [value]=1 />1 
+            <input name="nota3" type="radio" id="nota3Value2" [value]=2 />2 
+            <input name="nota3" type="radio" id="nota3Value3" [value]=3 />3 
+            <input name="nota3" type="radio" id="nota3Value4" [value]=4 />4 
+            <input name="nota3" type="radio" id="nota3Value5" [value]=5 />5 
+            <input name="nota3" type="radio" id="nota3Value6" [value]=6 />6 
+            <input name="nota3" type="radio" id="nota3Value7" [value]=7 />7 
+            <input name="nota3" type="radio" id="nota3Value8" [value]=8 />8 
+            <input name="nota3" type="radio" id="nota3Value9" [value]=9 />9 
+            <input name="nota3" type="radio" id="nota3Value10" [value]=10 />10 	
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 4:</strong>
+            <p>Didática: Demonstra preparo para ministrar os conteúdos previstos no plano de ensino?</p>
+            <strong>Nota: </strong>
+            <input name="nota4" type="radio" id="nota4Value0" [value]=0 />0 
+            <input name="nota4" type="radio" id="nota4Value1" [value]=1 />1 
+            <input name="nota4" type="radio" id="nota4Value2" [value]=2 />2 
+            <input name="nota4" type="radio" id="nota4Value3" [value]=3 />3 
+            <input name="nota4" type="radio" id="nota4Value4" [value]=4 />4 
+            <input name="nota4" type="radio" id="nota4Value5" [value]=5 />5 
+            <input name="nota4" type="radio" id="nota4Value6" [value]=6 />6 
+            <input name="nota4" type="radio" id="nota4Value7" [value]=7 />7 
+            <input name="nota4" type="radio" id="nota4Value8" [value]=8 />8 
+            <input name="nota4" type="radio" id="nota4Value9" [value]=9 />9 
+            <input name="nota4" type="radio" id="nota4Value10" [value]=10 />10 
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 5:</strong>
+            <p>Professor/aluno: Demonstra ser acessível, cordial e zela pela harmonia do ambiente e respeito durante as atividades?</p>
+            <strong>Nota: </strong>
+            <input name="nota5" type="radio" id="nota5Value0" [value]=0 />0 
+            <input name="nota5" type="radio" id="nota5Value1" [value]=1 />1 
+            <input name="nota5" type="radio" id="nota5Value2" [value]=2 />2 
+            <input name="nota5" type="radio" id="nota5Value3" [value]=3 />3 
+            <input name="nota5" type="radio" id="nota5Value4" [value]=4 />4 
+            <input name="nota5" type="radio" id="nota5Value5" [value]=5 />5 
+            <input name="nota5" type="radio" id="nota5Value6" [value]=6 />6 
+            <input name="nota5" type="radio" id="nota5Value7" [value]=7 />7 
+            <input name="nota5" type="radio" id="nota5Value8" [value]=8 />8 
+            <input name="nota5" type="radio" id="nota5Value9" [value]=9 />9 
+            <input name="nota5" type="radio" id="nota5Value10" [value]=10 />10 
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 6:</strong>
+            <p>Atendimento ao aluno: Informa os horários de atendimento extraclasse e demonstra interesse e disp. no atendimento ao aluno?</p>
+            <strong>Nota: </strong>
+            <input name="nota6" type="radio" id="nota6Value0" [value]=0 />0 
+            <input name="nota6" type="radio" id="nota6Value1" [value]=1 />1 
+            <input name="nota6" type="radio" id="nota6Value2" [value]=2 />2 
+            <input name="nota6" type="radio" id="nota6Value3" [value]=3 />3 
+            <input name="nota6" type="radio" id="nota6Value4" [value]=4 />4 
+            <input name="nota6" type="radio" id="nota6Value5" [value]=5 />5 
+            <input name="nota6" type="radio" id="nota6Value6" [value]=6 />6 
+            <input name="nota6" type="radio" id="nota6Value7" [value]=7 />7 
+            <input name="nota6" type="radio" id="nota6Value8" [value]=8 />8 
+            <input name="nota6" type="radio" id="nota6Value9" [value]=9 />9 
+            <input name="nota6" type="radio" id="nota6Value10" [value]=10 />10 
+        </mat-step>	
+        <mat-step state="notasIcon">
+            <strong>Questão 7:</strong>
+            <p>Recursos didáticos: Emprega diferentes recursos de aprendizagem como: quadro/giz, vídeo, slides, visitas técnicas, etc?</p>
+            <strong>Nota: </strong>
+            <input name="nota7" type="radio" id="nota7Value0" [value]=0 />0 
+            <input name="nota7" type="radio" id="nota7Value1" [value]=1 />1 
+            <input name="nota7" type="radio" id="nota7Value2" [value]=2 />2 
+            <input name="nota7" type="radio" id="nota7Value3" [value]=3 />3 
+            <input name="nota7" type="radio" id="nota7Value4" [value]=4 />4 
+            <input name="nota7" type="radio" id="nota7Value5" [value]=5 />5 
+            <input name="nota7" type="radio" id="nota7Value6" [value]=6 />6 
+            <input name="nota7" type="radio" id="nota7Value7" [value]=7 />7 
+            <input name="nota7" type="radio" id="nota7Value8" [value]=8 />8 
+            <input name="nota7" type="radio" id="nota7Value9" [value]=9 />9 
+            <input name="nota7" type="radio" id="nota7Value10" [value]=10 />10 
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 8:</strong>
+            <p>Avaliação de aprendizagem: Utiliza diferentes métodos de avaliação: prova, pesquisa/trabalho, lista de exercícios, etc?</p>
+            <strong>Nota: </strong>
+            <input name="nota8" type="radio" id="nota8Value0" [value]=0 />0 
+            <input name="nota8" type="radio" id="nota8Value1" [value]=1 />1 
+            <input name="nota8" type="radio" id="nota8Value2" [value]=2 />2 
+            <input name="nota8" type="radio" id="nota8Value3" [value]=3 />3 
+            <input name="nota8" type="radio" id="nota8Value4" [value]=4 />4 
+            <input name="nota8" type="radio" id="nota8Value5" [value]=5 />5 
+            <input name="nota8" type="radio" id="nota8Value6" [value]=6 />6 
+            <input name="nota8" type="radio" id="nota8Value7" [value]=7 />7 
+            <input name="nota8" type="radio" id="nota8Value8" [value]=8 />8 
+            <input name="nota8" type="radio" id="nota8Value9" [value]=9 />9 
+            <input name="nota8" type="radio" id="nota8Value10" [value]=10 />10 	
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 9:</strong>
+            <p>Avaliações: Deixa claro os conteúdos que serão avaliados, dosando os conteúdos cobrados entre uma avaliação e outra?</p>
+            <strong>Nota: </strong>
+            <input name="nota9" type="radio" id="nota9Value0" [value]=0 />0 
+            <input name="nota9" type="radio" id="nota9Value1" [value]=1 />1 
+            <input name="nota9" type="radio" id="nota9Value2" [value]=2 />2 
+            <input name="nota9" type="radio" id="nota9Value3" [value]=3 />3 
+            <input name="nota9" type="radio" id="nota9Value4" [value]=4 />4 
+            <input name="nota9" type="radio" id="nota9Value5" [value]=5 />5 
+            <input name="nota9" type="radio" id="nota9Value6" [value]=6 />6 
+            <input name="nota9" type="radio" id="nota9Value7" [value]=7 />7 
+            <input name="nota9" type="radio" id="nota9Value8" [value]=8 />8 
+            <input name="nota9" type="radio" id="nota9Value9" [value]=9 />9 
+            <input name="nota9" type="radio" id="nota9Value10" [value]=10 />10 		
+        </mat-step>
+        <mat-step state="notasIcon">
+            <strong>Questão 10:</strong>
+            <p>Devolutiva: As avaliações são corrigidas, comentadas e devolvidas em tempo hábil?</p>
+            <strong>Nota: </strong>
+            <input name="nota10" type="radio" id="nota10Value0" [value]=0 />0 
+            <input name="nota10" type="radio" id="nota10Value1" [value]=1 />1 
+            <input name="nota10" type="radio" id="nota10Value2" [value]=2 />2 
+            <input name="nota10" type="radio" id="nota10Value3" [value]=3 />3 
+            <input name="nota10" type="radio" id="nota10Value4" [value]=4 />4 
+            <input name="nota10" type="radio" id="nota10Value5" [value]=5 />5 
+            <input name="nota10" type="radio" id="nota10Value6" [value]=6 />6 
+            <input name="nota10" type="radio" id="nota10Value7" [value]=7 />7 
+            <input name="nota10" type="radio" id="nota10Value8" [value]=8 />8 
+            <input name="nota10" type="radio" id="nota10Value9" [value]=9 />9 
+            <input name="nota10" type="radio" id="nota10Value10" [value]=10 />10 
+        </mat-step>
+        <mat-step state="notasIcon">
+            <p>Deseja realmente enviar esta avaliação?</p>
+            <button mat-raised-button color="primary" (click)="gerarNota()">Enviar</button>	
+            
+        </mat-step>
+           <!-- Substituições de ícones -->
+        <ng-template matStepperIcon="notasIcon">
+            <mat-icon>notes</mat-icon>
+        </ng-template>
+    </mat-horizontal-stepper>
 
 </form>
     
