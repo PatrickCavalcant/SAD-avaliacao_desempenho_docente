@@ -58,6 +58,28 @@ public class LancamentoController {
 
 	public LancamentoController() {
 	}
+	/**
+	 * Retorna a listagem de lançamentos de um funcionário.
+	 *
+	 * @param alunoId
+	 * @return ResponseEntity<Response<LancamentoDto>>
+	 */
+	@GetMapping(value = "/aluno/{alunoId}")
+	public ResponseEntity<Response<Page<LancamentoDto>>> listarPorAlunoId(
+			@PathVariable("alunoId") Long alunoId,
+			@RequestParam(value = "pag", defaultValue = "0") int pag,
+			@RequestParam(value = "ord", defaultValue = "data") String ord,
+			@RequestParam(value = "dir", defaultValue = "DESC") String dir) {
+		log.info("Buscando lançamentos por ID do aluno: {}, página: {}", alunoId, pag);
+		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
+
+		PageRequest pageRequest = PageRequest.of(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
+		Page<Lancamento> lancamentos = this.lancamentoService.buscarPorAlunoId(alunoId, pageRequest);
+		Page<LancamentoDto> lancamentosDto = lancamentos.map(lancamento -> this.converterLancamentoDto(lancamento));
+
+		response.setData(lancamentosDto);
+		return ResponseEntity.ok(response);
+	}
 
 	/**
 	 * Retorna a listagem de lançamentos de um funcionário.

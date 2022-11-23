@@ -13,7 +13,7 @@ public class LancamentoDto {
 	private String disciplina;
 	private String nota;
 	private Long usuarioId;
-	private String aluno_id;
+	private Long aluno_id;
 
 	public LancamentoDto() {
 	}
@@ -67,11 +67,11 @@ public class LancamentoDto {
 		this.nota = nota;
 	}
 
-	public String getAlunoId() {
+	public Long getAlunoId() {
 		return aluno_id;
 	}
 
-	public void setAlunoId(String aluno_id) {
+	public void setAlunoId(Long aluno_id) {
 		this.aluno_id = aluno_id;
 	}
 

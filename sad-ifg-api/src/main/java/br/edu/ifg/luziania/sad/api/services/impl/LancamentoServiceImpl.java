@@ -24,6 +24,11 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
 
+	public Page<Lancamento> buscarPorAlunoId(Long alunoId, PageRequest pageRequest) {
+		log.info("Buscando lançamentos para o aluno ID {}", alunoId);
+		return this.lancamentoRepository.findByAlunoId(alunoId, pageRequest);
+	}
+
 	public Page<Lancamento> buscarPorUsuarioId(Long usuarioId, PageRequest pageRequest) {
 		log.info("Buscando lançamentos para o usuário ID {}", usuarioId);
 		return this.lancamentoRepository.findByUsuarioId(usuarioId, pageRequest);

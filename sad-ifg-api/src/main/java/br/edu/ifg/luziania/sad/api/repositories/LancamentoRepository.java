@@ -21,7 +21,10 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 
 	List<Lancamento> findByUsuarioId(@Param("usuarioId") Long usuarioId);
 
+	Page<Lancamento> findByAlunoId(@Param("alunoId") Long alunoId, Pageable pageable);
+
 	Page<Lancamento> findByUsuarioId(@Param("usuarioId") Long usuarioId, Pageable pageable);
+
 
 	Lancamento findFirstByUsuarioIdOrderByDataCriacaoDesc(Long usuarioId);
 

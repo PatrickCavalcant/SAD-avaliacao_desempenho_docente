@@ -22,7 +22,7 @@ public class Lancamento implements Serializable {
 	private Date dataAtualizacao;
 	private TipoEnum tipo;
 	private Usuario usuario;
-	private String aluno_id;
+	private Long aluno_id;
 
 
 	public Lancamento() {
@@ -112,11 +112,11 @@ public class Lancamento implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String getAlunoId() {
+	public Long getAlunoId() {
 		return aluno_id;
 	}
 
-	public void setAlunoId(String aluno_id) {
+	public void setAlunoId(Long aluno_id) {
 		this.aluno_id = aluno_id;
 	}
 

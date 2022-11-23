@@ -27,12 +27,9 @@ CREATE TABLE `usuario` (
   `email` varchar(255) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `perfil` varchar(255) NOT NULL,
-  `qtd_horas_almoco` float DEFAULT NULL,
-  `qtd_horas_trabalho_dia` float DEFAULT NULL,
   `senha` varchar(255) NOT NULL,
   `disciplina` varchar(255),
   `periodo` varchar(255),
-  `valor_hora` decimal(19,2) DEFAULT NULL,
   `empresa_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

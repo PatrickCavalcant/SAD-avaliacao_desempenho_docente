@@ -12,6 +12,15 @@ public interface LancamentoService {
 
 	/**
 	 * Retorna uma lista paginada de lançamentos de um determinado funcionário.
+	 *
+	 * @param alunoId
+	 * @param pageRequest
+	 * @return Page<Lancamento>
+	 */
+	Page<Lancamento> buscarPorAlunoId(Long alunoId, PageRequest pageRequest);
+
+	/**
+	 * Retorna uma lista paginada de lançamentos de um determinado funcionário.
 	 * 
 	 * @param usuarioId
 	 * @param pageRequest

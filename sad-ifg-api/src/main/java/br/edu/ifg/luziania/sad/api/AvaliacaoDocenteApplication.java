@@ -40,7 +40,7 @@ public class AvaliacaoDocenteApplication {
 
 		@Override
 		public void run(String...args) throws Exception {
-			Empresa empresa = new Empresa();
+			/* Empresa empresa = new Empresa();
 			empresa.setRazaoSocial("Empresa Teste");
 			empresa.setCnpj("99999999999999");
 			empresaRepository.save(empresa);
@@ -78,6 +78,8 @@ public class AvaliacaoDocenteApplication {
 
 			gerarLancamentos(usuario, 20);
 			gerarLancamentos(usuarioDocente, 20);
+
+			 */
 		}
 	}
 
