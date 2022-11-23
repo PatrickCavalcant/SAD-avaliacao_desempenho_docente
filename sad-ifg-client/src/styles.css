@@ -3,3 +3,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* LEFT align */
+.mat-list .mat-list-item.left .mat-list-item-content{
+    justify-content: flex-start;
+}
+
+/* RIGHT align */
+.mat-list .mat-list-item.right .mat-list-item-content{
+    justify-content: flex-end;
+}
