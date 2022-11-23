@@ -21,6 +21,8 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -55,6 +57,7 @@ import { AdminGuard } from './services';
     MatInputModule,
     MatButtonModule,
     MatListModule,
+    MatCardModule,
     MatTooltipModule,
     MatIconModule,
     MatSnackBarModule,

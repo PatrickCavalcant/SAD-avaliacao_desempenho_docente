@@ -1,5 +1,5 @@
 <form  class="content">
-<mat-list role="list">
+<!-- <mat-list role="list">
   <mat-list-item class="right">
     <a mat-button color="warn" 
     routerLink="/admin/cadastro"
@@ -13,7 +13,7 @@
       Cadastrar Empresa
     </a>
   </mat-list-item>
-</mat-list>
+</mat-list> -->
 
 <mat-list role="list">
   <mat-list-item class="left">
@@ -64,12 +64,12 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="discipina">
+    <ng-container matColumnDef="disciplina">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
-      	Discipina
+      	Disciplina
       </mat-header-cell>
       <mat-cell *matCellDef="let lancamento">
-      	{{ lancamento.discipina }}
+      	{{ lancamento.disciplina }}
       </mat-cell>
     </ng-container>
 

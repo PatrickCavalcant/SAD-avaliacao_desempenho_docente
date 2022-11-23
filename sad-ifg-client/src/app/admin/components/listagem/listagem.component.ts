@@ -28,7 +28,7 @@ import {
 export class ListagemComponent implements OnInit {
 
   dataSource: MatTableDataSource<Lancamento>;
-  colunas: string[] = ['data', 'tipo', 'periodo', 'discipina', 'nota', 'acao'];
+  colunas: string[] = ['data', 'tipo', 'periodo', 'disciplina', 'nota', 'acao'];
   usuarioId: string;
   totalLancamentos: number;
 
@@ -107,6 +107,7 @@ export class ListagemComponent implements OnInit {
           this.totalLancamentos = data['data'].totalElements;
           const lancamentos = data['data'].content as Lancamento[];
           this.dataSource = new MatTableDataSource<Lancamento>(lancamentos);
+          console.log(this.dataSource);
         },
         err => {
           const msg: string = "Erro obtendo lançamentos.";

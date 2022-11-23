@@ -7,9 +7,11 @@ import * as moment from 'moment';
 
 import {
   Lancamento,
-  Tipo,
+  Tipo,  
+  Usuario,
   LancamentoService,
-  HttpUtilService
+  HttpUtilService,
+  UsuarioService
 } from '../../../shared';
 
 @Component({
@@ -20,12 +22,21 @@ import {
 export class AtualizacaoComponent implements OnInit {
 
   form: FormGroup;
-  usuarioLogadoId: string;
+  alunoId: string;
+  periodo: string;
+  disciplina: string;
+  professor: string;
+  aluno: string;
+  tipo: string;
+
   horas: string[];
   minutos: string[];
   tipos: string[];
   periodos: string[];
+  disciplinas: string[];
   notas: string[];
+  usuarios: Usuario[];
+
 
   lancamentoId: string;
  
@@ -35,22 +46,20 @@ export class AtualizacaoComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private httpUtil: HttpUtilService,
+    private UsuarioService: UsuarioService,
     private lancamentoService: LancamentoService) { }
 
   ngOnInit() {
     this.lancamentoId = this.route.snapshot.paramMap.get('lancamentoId');
-  	this.horas = this.gerarListaNumeros(0, 23);
-  	this.minutos = this.gerarListaNumeros(0, 59);
-  	this.tipos = [
-  		Tipo.AVALIACAO_ALUNO,
-  		Tipo.AUTO_AVALIACAO,
-  		Tipo.AVALIACAO_SUPERIOR
-  	];
+  	this.horas = this.gerarData(0, 23);
+  	this.minutos = this.gerarData(0, 59);
+
+
     this.notas = this.gerarListaNumeros(1, 10);
 
     this.gerarForm();
     this.obterDadosLancamento();
-    this.usuarioLogadoId = this.httpUtil.obterIdUsuario();
+    // this.usuarioLogadoId = this.httpUtil.obterIdUsuario();
 
   }
 
@@ -62,9 +71,17 @@ export class AtualizacaoComponent implements OnInit {
           this.form.get('data').setValue(data.substr(0, 10));
           this.form.get('horas').setValue(data.substr(11, 2));
           this.form.get('minutos').setValue(data.substr(14, 2));
-          this.form.get('tipo').setValue(dados.data.tipo);
+          this.tipo = dados.data.tipo;
           this.form.get('nota').setValue(dados.data.nota);
-          this.form.get('periodo').setValue(dados.data.periodo);
+          this.periodo = dados.data.periodo;
+          this.disciplina = dados.data.disciplina;
+          this.alunoId = dados.data.alunoId;
+          this.form.get('disciplina').setValue(this.disciplina);
+          this.form.get('periodo').setValue(this.periodo);
+          this.obterUsuarios();
+
+
+
 
         },
         err => {
@@ -75,7 +92,7 @@ export class AtualizacaoComponent implements OnInit {
       );
   }
 
-  gerarListaNumeros(inicio: number, termino: number): string[] {
+  gerarData(inicio: number, termino: number): string[] {
   	const numeros: string[] = Array();
   	for (let i = inicio; i <= termino; i++) {
   		let numero: string = i.toString();
@@ -87,14 +104,28 @@ export class AtualizacaoComponent implements OnInit {
   	return numeros;
   }
 
+  gerarListaNumeros(inicio: number, termino: number): string[] {
+  	const numeros: string[] = Array();
+  	for (let i = inicio; i <= termino; i++) {
+  		let numero: string = i.toString();
+  		if (i < 10) {
+  			numero;
+  		}
+  		numeros.push(numero);
+  	}
+  	return numeros;
+  }
+
   gerarForm() {
   	this.form = this.fb.group({
   		data: ['', [Validators.required]],
-  		tipo: ['', [Validators.required]],
       horas: ['', [Validators.required]],
       minutos: ['', [Validators.required]],
       nota: ['', [Validators.required]],
       periodo: ['', [Validators.required]],
+      disciplina: ['', [Validators.required]],
+
+
   	});
   }
 
@@ -129,12 +160,14 @@ export class AtualizacaoComponent implements OnInit {
 
     return new Lancamento(
         data.format('YYYY-MM-DD HH:mm:ss'),
-        dados.tipo,
+        this.tipo,
         dados.nota,
-        dados.periodo,
+        this.periodo,
+        this.disciplina,
         this.usuarioId,
-        this.lancamentoId,
-        this.usuarioLogadoId
+        this.alunoId,
+        this.lancamentoId
+
       );
   }
 
@@ -142,4 +175,25 @@ export class AtualizacaoComponent implements OnInit {
     return sessionStorage['usuarioId'];
   }
 
+  obterUsuarios() {
+    this.UsuarioService.listarUsuariosPorEmpresa()
+      .subscribe(
+        data => {
+          const resultAluno = this.usuarios = (data.data as Usuario[]) //obtem todos os usuários
+            .filter(func => func.id == this.alunoId); //filtra pelo id do aluno
+          this.aluno = resultAluno[0].nome; //recebe o nome do aluno
+
+          const resultprofessor = this.usuarios = (data.data as Usuario[]) //obtem todos os usuários
+            .filter(func => func.id == this.usuarioId); //filtra pelo id do professor
+          this.professor = resultprofessor[0].nome; //recebe o nome do professor
+
+        },
+        err => {
+          const msg: string = "Erro obtendo usuários.";
+          this.snackBar.open(msg, "Erro", { duration: 5000 });
+        }
+      );
+  }
+
 }
+
