@@ -9,6 +9,8 @@
 .header{
   align-items: center;
   background-color: #3F51B5;
+  position: fixed;
+  
 
 }
 
@@ -27,7 +29,7 @@
 }
 
 .mat-elevation-z5 {
-  position: relative;
+  /* position: relative; */
   z-index: 2;
 }
 

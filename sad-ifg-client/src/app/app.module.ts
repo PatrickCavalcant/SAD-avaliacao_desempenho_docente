@@ -38,6 +38,8 @@ import {
   AvaliacaoRoutingModule
 } from './avaliacao';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +70,8 @@ import {
     AvaliacaoModule,
     AvaliacaoRoutingModule,
     MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     AppRoutingModule
   ],

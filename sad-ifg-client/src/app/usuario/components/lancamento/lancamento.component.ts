@@ -29,6 +29,9 @@ export class LancamentoComponent implements OnInit {
   dataAtual: string;
   geoLocation: string;
   periodo: string
+  disciplina: string
+  tipo: string;
+  nota: Number;
   ultimoTipoLancado: string;
 
   constructor(
@@ -67,23 +70,6 @@ export class LancamentoComponent implements OnInit {
     return '';
   }
 
-  // ===> Retirar essas funçoes
-  iniciarTrabalho() {
-    this.cadastrar(Tipo.AVALIACAO_ALUNO);
-  }
-
-  terminarTrabalho() {
-    this.cadastrar(Tipo.AUTO_AVALIACAO);
-  }
-
-  iniciarAlmoco() {
-    this.cadastrar(Tipo.AVALIACAO_SUPERIOR);
-  }
-
-  terminarAlmoco() {
-    this.cadastrar(Tipo.AVALIACAO_SUPERIOR);
-  }
-
   obterUltimoLancamento() {
     this.lancamentoService.buscarUltimoTipoLancado()
       .subscribe(
@@ -97,14 +83,33 @@ export class LancamentoComponent implements OnInit {
       );
   }
 
-  cadastrar(tipo: Tipo) {
+  gerarNota(){
+;
+    const media: number[] = Array();
+
+    let valor: number;
+
+    console.log(valor);
+    this.nota = 10;
+    this.tipo = "AUTO_AVALIACAO";
+
+    media.push(valor);
+    this.cadastrar();
+    return media;
+  }
+
+
+  cadastrar() {
   	const lancamento: Lancamento = new Lancamento(
       this.dataAtualEn,
-      tipo,
+      this.tipo,
+      this.nota,
       this.periodo,
-      this.geoLocation,
+      this.disciplina = "teste",
+      this.disciplina = "teste", //Aluno_id
       this.httpUtil.obterIdUsuario()
     );
+
 
     this.lancamentoService.cadastrar(lancamento)
       .subscribe(
