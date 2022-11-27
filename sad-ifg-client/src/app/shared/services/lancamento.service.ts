@@ -10,6 +10,7 @@ import { HttpUtilService } from './http-util.service';
 export class LancamentoService {
 
   private readonly PATH: string = 'lancamentos';
+  private readonly PATH_TODOS_LANCAMENTOS = '/todos';
   private readonly PATH_ULTIMO_LANC = '/usuario/{usuarioId}/ultimo';
   private readonly PATH_LANCAMENTOS = '/usuario/{usuarioId}';
   private readonly PATH_LANCAMENTOS_ALUNO = '/aluno/{alunoId}';
@@ -34,6 +35,14 @@ export class LancamentoService {
   	  	lancamento,
   	  	this.httpUtil.headers()
   	);
+  }
+
+  listarLancamentos(): Observable<any> {
+    return this.http.get(
+        env.baseApiUrl + this.PATH + 
+          this.PATH_TODOS_LANCAMENTOS,
+        this.httpUtil.headers()
+    );
   }
 
   listarTodosLancamentos(): Observable<any> {
