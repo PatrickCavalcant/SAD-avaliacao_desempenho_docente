@@ -34,12 +34,8 @@ public class Usuario implements Serializable {
 	private String nome;
 	private String email;
 	private String senha;
-	private String disciplina;
-	private String periodo;
 	private String cpf;
-	private BigDecimal valorHora;
-	private Float qtdHorasTrabalhoDia;
-	private Float qtdHorasAlmoco;
+
 	private PerfilEnum perfil;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
@@ -77,23 +73,6 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "disciplina", nullable = false)
-	public String getDisciplina() {
-		return disciplina;
-	}
-
-	public void setDisciplina(String disciplina) {
-		this.disciplina = disciplina;
-	}
-
-	@Column(name = "periodo", nullable = false)
-	public String getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
-	}
 
 	@Column(name = "cpf", nullable = false)
 	public String getCpf() {
@@ -104,47 +83,6 @@ public class Usuario implements Serializable {
 		this.cpf = cpf;
 	}
 
-	@Column(name = "valor_hora", nullable = true)
-	public BigDecimal getValorHora() {
-		return valorHora;
-	}
-
-	@Transient
-	public Optional<BigDecimal> getValorHoraOpt() {
-		return Optional.ofNullable(valorHora);
-	}
-
-	public void setValorHora(BigDecimal valorHora) {
-		this.valorHora = valorHora;
-	}
-
-	@Column(name = "qtd_horas_trabalho_dia", nullable = true)
-	public Float getQtdHorasTrabalhoDia() {
-		return qtdHorasTrabalhoDia;
-	}
-
-	@Transient
-	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
-		return Optional.ofNullable(qtdHorasTrabalhoDia);
-	}
-
-	public void setQtdHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
-		this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
-	}
-
-	@Column(name = "qtd_horas_almoco", nullable = true)
-	public Float getQtdHorasAlmoco() {
-		return qtdHorasAlmoco;
-	}
-
-	@Transient
-	public Optional<Float> getQtdHorasAlmocoOpt() {
-		return Optional.ofNullable(qtdHorasAlmoco);
-	}
-
-	public void setQtdHorasAlmoco(Float qtdHorasAlmoco) {
-		this.qtdHorasAlmoco = qtdHorasAlmoco;
-	}
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "perfil", nullable = false)
@@ -217,9 +155,8 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
-				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
-				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
-				+ dataAtualizacao + ", empresa=" + empresa + ", disciplina=" + disciplina + ", periodo=" + periodo + "]";
+				+ ", perfil=" + perfil + ", dataCriacao=" + dataCriacao
+				+ ", dataAtualizacao=" + dataAtualizacao + ", empresa=" + empresa + "]";
 	}
 
 }

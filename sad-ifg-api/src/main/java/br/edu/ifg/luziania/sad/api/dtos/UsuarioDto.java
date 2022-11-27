@@ -12,11 +12,6 @@ public class UsuarioDto {
 	private String nome;
 	private String email;
 	private Optional<String> senha = Optional.empty();
-	private String disciplina;
-	private String periodo;
-	private Optional<String> valorHora = Optional.empty();
-	private Optional<String> qtdHorasTrabalhoDia = Optional.empty();
-	private Optional<String> qtdHorasAlmoco = Optional.empty();
 
 	public UsuarioDto() {
 	}
@@ -50,22 +45,6 @@ public class UsuarioDto {
 		this.email = email;
 	}
 
-	public String getDisciplina() {
-		return disciplina;
-	}
-
-	public void setDisciplina(String disciplina) {
-		this.disciplina = disciplina;
-	}
-
-	public String getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
-	}
-
 	public Optional<String> getSenha() {
 		return senha;
 	}
@@ -74,35 +53,9 @@ public class UsuarioDto {
 		this.senha = senha;
 	}
 
-	public Optional<String> getValorHora() {
-		return valorHora;
-	}
-
-	public void setValorHora(Optional<String> valorHora) {
-		this.valorHora = valorHora;
-	}
-
-	public Optional<String> getQtdHorasTrabalhoDia() {
-		return qtdHorasTrabalhoDia;
-	}
-
-	public void setQtdHorasTrabalhoDia(Optional<String> qtdHorasTrabalhoDia) {
-		this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
-	}
-
-	public Optional<String> getQtdHorasAlmoco() {
-		return qtdHorasAlmoco;
-	}
-
-	public void setQtdHorasAlmoco(Optional<String> qtdHorasAlmoco) {
-		this.qtdHorasAlmoco = qtdHorasAlmoco;
-	}
-
 	@Override
 	public String toString() {
-		return "UsuarioDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", valorHora="
-				+ valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco=" + qtdHorasAlmoco
-				+ ", disciplina=" + disciplina + ", periodo=" + periodo +"]";
+		return "UsuarioDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}
 
 }

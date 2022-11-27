@@ -109,11 +109,6 @@ public class CadastroPFController {
 		usuario.setCpf(cadastroPFDto.getCpf());
 		usuario.setPerfil(PerfilEnum.ROLE_USUARIO);
 		usuario.setSenha(PasswordUtils.gerarBCrypt(cadastroPFDto.getSenha()));
-		cadastroPFDto.getQtdHorasAlmoco()
-				.ifPresent(qtdHorasAlmoco -> usuario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
-		cadastroPFDto.getQtdHorasTrabalhoDia()
-				.ifPresent(qtdHorasTrabDia -> usuario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
-		cadastroPFDto.getValorHora().ifPresent(valorHora -> usuario.setValorHora(new BigDecimal(valorHora)));
 
 		return usuario;
 	}
@@ -131,12 +126,7 @@ public class CadastroPFController {
 		cadastroPFDto.setEmail(usuario.getEmail());
 		cadastroPFDto.setCpf(usuario.getCpf());
 		cadastroPFDto.setCnpj(usuario.getEmpresa().getCnpj());
-		usuario.getQtdHorasAlmocoOpt().ifPresent(qtdHorasAlmoco -> cadastroPFDto
-				.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
-		usuario.getQtdHorasTrabalhoDiaOpt().ifPresent(
-				qtdHorasTrabDia -> cadastroPFDto.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
-		usuario.getValorHoraOpt()
-				.ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));
+
 
 		return cadastroPFDto;
 	}

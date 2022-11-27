@@ -100,20 +100,6 @@ public class UsuarioController {
 					.ifPresent(func -> result.addError(new ObjectError("email", "Email já existente.")));
 			usuario.setEmail(usuarioDto.getEmail());
 		}
-		usuario.setQtdHorasAlmoco(null);
-		usuarioDto.getQtdHorasAlmoco()
-				.ifPresent(qtdHorasAlmoco -> usuario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
-
-		usuario.setDisciplina(usuarioDto.getDisciplina());
-
-		usuario.setPeriodo(usuarioDto.getPeriodo());
-
-		usuario.setQtdHorasTrabalhoDia(null);
-		usuarioDto.getQtdHorasTrabalhoDia()
-				.ifPresent(qtdHorasTrabDia -> usuario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
-
-		usuario.setValorHora(null);
-		usuarioDto.getValorHora().ifPresent(valorHora -> usuario.setValorHora(new BigDecimal(valorHora)));
 
 		if (usuarioDto.getSenha().isPresent()) {
 			usuario.setSenha(PasswordUtils.gerarBCrypt(usuarioDto.getSenha().get()));
@@ -131,15 +117,6 @@ public class UsuarioController {
 		usuarioDto.setId(usuario.getId());
 		usuarioDto.setEmail(usuario.getEmail());
 		usuarioDto.setNome(usuario.getNome());
-		usuarioDto.setDisciplina(usuario.getDisciplina());
-		usuarioDto.setPeriodo(usuario.getPeriodo());
-		usuario.getQtdHorasAlmocoOpt().ifPresent(
-				qtdHorasAlmoco -> usuarioDto.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
-		usuario.getQtdHorasTrabalhoDiaOpt().ifPresent(
-				qtdHorasTrabDia -> usuarioDto.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
-		usuario.getValorHoraOpt()
-				.ifPresent(valorHora -> usuarioDto.setValorHora(Optional.of(valorHora.toString())));
-
 
 		return usuarioDto;
 	}
