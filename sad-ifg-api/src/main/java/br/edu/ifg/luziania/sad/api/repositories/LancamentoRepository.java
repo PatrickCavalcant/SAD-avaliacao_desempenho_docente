@@ -16,7 +16,8 @@ import br.edu.ifg.luziania.sad.api.entities.Lancamento;
 @Transactional(readOnly = true)
 @NamedQueries({
 		@NamedQuery(name = "LancamentoRepository.findByUsuarioId",
-				query = "SELECT lanc FROM Lancamento lanc WHERE lanc.usuario.id = :usuarioId") })
+				query = "SELECT lanc FROM Lancamento lanc WHERE lanc.usuario.id = :usuarioId")})
+
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 
 	List<Lancamento> findByUsuarioId(@Param("usuarioId") Long usuarioId);
@@ -29,5 +30,9 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 	Lancamento findFirstByUsuarioIdOrderByDataCriacaoDesc(Long usuarioId);
 
 	List<Lancamento> findByUsuarioIdOrderByDataDesc(Long usuarioId);
+
+
+
+
 
 }

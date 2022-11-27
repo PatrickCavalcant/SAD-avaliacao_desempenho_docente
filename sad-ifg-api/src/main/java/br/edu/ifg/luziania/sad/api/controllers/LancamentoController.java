@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import br.edu.ifg.luziania.sad.api.repositories.LancamentoRepository;
 import org.apache.commons.lang3.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,9 @@ public class LancamentoController {
 
 	@Autowired
 	private LancamentoService lancamentoService;
+
+	@Autowired
+	private LancamentoRepository lancamentoRepository;
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -146,6 +150,30 @@ public class LancamentoController {
 		response.setData(this.converterLancamentoDto(lancamento.get()));
 		return ResponseEntity.ok(response);
 	}
+
+	/**
+	 * Retorna todos lançamentos.
+	 * O método findAll() do JPA, busca tudo que estiver na tabela da nossa entidade na base.
+	 *
+	 * @param
+	 * @return ResponseEntity<Response<LancamentoDto>>
+	 */
+
+	@GetMapping(value = "/todos")
+	public ResponseEntity<Response<List<LancamentoDto>>> listarTodos() {
+
+		log.info("Buscando todos lançamentos {}");
+		Response<List<LancamentoDto>> response = new Response<List<LancamentoDto>>();
+
+		List<Lancamento> lancamentos = lancamentoRepository.findAll();
+
+		response.setData(lancamentos.stream()
+				.map(lancamento -> converterLancamentoDto(lancamento))
+				.collect(Collectors.toList()));
+
+		return ResponseEntity.ok(response);
+	}
+
 
 	/**
 	 * Adiciona um novo lançamento.

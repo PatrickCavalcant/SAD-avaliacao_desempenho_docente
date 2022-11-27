@@ -66,4 +66,6 @@ public interface LancamentoService {
 	 * @return List<Lancamento>
 	 */
     List<Lancamento> buscarTodosPorUsuarioId(Long usuarioId);
+
+
 }

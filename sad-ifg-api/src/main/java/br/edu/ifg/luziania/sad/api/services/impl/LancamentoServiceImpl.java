@@ -38,6 +38,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 		log.info("Buscando todos os lançamentos para o usuário ID {}", usuarioId);
 		return this.lancamentoRepository.findByUsuarioIdOrderByDataDesc(usuarioId);
 	}
+
+
 	
 	@Cacheable("lancamentoPorId")
 	public Optional<Lancamento> buscarPorId(Long id) {
@@ -62,5 +64,6 @@ public class LancamentoServiceImpl implements LancamentoService {
 		return Optional.ofNullable(
 				this.lancamentoRepository.findFirstByUsuarioIdOrderByDataCriacaoDesc(usuarioId));
 	}
+
 
 }
