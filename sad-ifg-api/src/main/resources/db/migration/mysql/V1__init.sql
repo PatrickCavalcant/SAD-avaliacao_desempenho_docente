@@ -28,8 +28,6 @@ CREATE TABLE `usuario` (
   `nome` varchar(255) NOT NULL,
   `perfil` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `disciplina` varchar(255),
-  `periodo` varchar(255),
   `empresa_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
