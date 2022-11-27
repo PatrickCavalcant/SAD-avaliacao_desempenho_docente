@@ -5,6 +5,7 @@ import {
 	AtualizacaoComponent,
 	CadastroComponent, 
 	ListagemComponent,
+	RelatorioComponent,
 	AdminComponent
 } from './components';
 
@@ -27,7 +28,11 @@ export const AdminRoutes: Routes = [
 		  {
 			path: 'atualizacao/:lancamentoId', 
 			component: AtualizacaoComponent 
-		  }
+		  },
+		  {
+			path: 'relatorio', 
+			component: RelatorioComponent 
+		  },
 		]
 	}
 ];

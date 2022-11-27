@@ -10,6 +10,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as XLSX from 'xlsx';
 
 import {
   LancamentoService,
@@ -26,6 +27,8 @@ import {
   styleUrls: ['./listagem.component.css']
 })
 export class ListagemComponent implements OnInit {
+  title = 'angular-app';
+  fileName= 'ExcelSheet.xlsx';
 
   dataSource: MatTableDataSource<Lancamento>;
   colunas: string[] = ['data', 'tipo', 'periodo', 'disciplina', 'nota', 'acao'];
@@ -47,6 +50,21 @@ export class ListagemComponent implements OnInit {
     private fb: FormBuilder,
     private UsuarioService: UsuarioService,
     private dialog: MatDialog) { }
+
+    exportexcel(): void
+    {
+      /* passe aqui o id da tabela */
+      let element = document.getElementById('excel-table');
+      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+   
+      /* gerar pasta de trabalho e adicionar a planilha */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+   
+      /* salvar em arquivo */  
+      XLSX.writeFile(wb, this.fileName);
+   
+    }   
 
   ngOnInit() {
     this.pagina = 0;

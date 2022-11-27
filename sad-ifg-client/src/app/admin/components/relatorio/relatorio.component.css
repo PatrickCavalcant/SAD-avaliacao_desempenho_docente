@@ -1,0 +1,46 @@
+.content {
+    padding: 1em 2em 5em 20em;
+    background-color: #FFF;
+  }
+  
+.button {
+  top: 2px;
+  left: 15px;
+}
+
+
+.hide{
+  display:none;
+}
+
+.show{
+  display:block;
+}
+
+
+.toggle-1:checked ~ .ocultarDiv {
+  display:block;
+}
+
+/*Estilizar Tabela*/
+table {
+  border-collapse: collapse;
+}
+
+table {
+  border: 1px solid black;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}

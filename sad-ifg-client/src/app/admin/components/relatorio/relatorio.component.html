@@ -1,0 +1,83 @@
+<form  class="content">
+
+  <h2 fxLayoutAlign="center">Relatórios</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Selecione o relatório:</mat-label>
+    <select 
+      id="tipoRelatorio"
+      matNativeControl 
+      required 
+      #elementRelatorio 
+      (click)="disponibilizaRelatorio()">
+      <option value=""></option>
+      <option value="usuarios">Usuários</option>
+      <option value="lancamentos">Lançamentos</option>
+      <option value="disciplinas">Disciplinas</option>
+    </select>
+  </mat-form-field>
+  <button mat-raised-button class="button" color="primary" (click)="gerarRelatorios()">Exportar para Excel</button>
+  
+
+  <div id="panelRelatorioUsuarios">
+    <table id="tabela-usuarios">
+      <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>E-mail</th>        
+      </tr>
+      <tr *ngFor="let usuario of usuarios | paginate: {itemsPerPage: 999999999, currentPage: paginaAtual }; let i = index">
+        <td>{{usuario.id}}</td>
+        <td>{{usuario.nome}}</td>
+        <td>{{usuario.email}}</td>
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+  </div>
+
+  <div id="panelRelatorioDisciplinas">
+    <table id="tabela-disciplinas">
+      <tr>
+        <th>Disciplina</th>
+        <th>Aluno</th>
+        <th>Professor</th>  
+        <th>Período</th>              
+      </tr>
+      <tr *ngFor="let disciplina of todasDisciplinas | paginate: {itemsPerPage: 999999999, currentPage: paginaAtual }; let i = index">
+        <td>{{disciplina.disciplina}}</td>
+        <td>{{disciplina.aluno}}</td>
+        <td>{{disciplina.professor}}</td>
+        <td>{{disciplina.periodo}}</td>
+
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+  </div>
+
+  <div id="panelRelatorioLancamentos">
+    <table id="tabela-lancamentos">
+      <tr>
+        <th>Id</th>
+        <th>Professor</th>
+        <th>Aluno</th>  
+        <th>Nota</th>   
+        <th>Disciplina</th>   
+        <th>Período</th>
+        <th>Tipo</th>  
+        <th>Data</th>             
+      </tr>
+      <tr *ngFor="let lancamento of todosLancamentos | paginate: {itemsPerPage: 999999999, currentPage: paginaAtual }; let i = index">
+        <td>{{lancamento.id}}</td>
+        <td>{{lancamento.usuarioId}}</td>
+        <td>{{lancamento.alunoId}}</td>
+        <td>{{lancamento.nota}}</td>
+        <td>{{lancamento.disciplina}}</td>
+        <td>{{lancamento.periodo}}</td>
+        <td>{{lancamento.tipo}}</td>
+        <td>{{lancamento.data}}</td>
+
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+  </div>
+
+</form>
