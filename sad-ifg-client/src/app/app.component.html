@@ -22,50 +22,50 @@
   <mat-sidenav-container *ngIf="autenticado()" >
     <mat-sidenav class="sidenav" mode="side" opened 
         fixedInViewport="true" fixedTopGap="64" >
-        <mat-nav-list class="nav-list"  >
-            <a mat-list-item routerLink="/home">
+        <mat-nav-list class="nav-list">
+            <a mat-list-item routerLink="/home" *ngIf="home">
                 <i class="material-icons">
                     home
                 </i>
                 Início
             </a>
-            <a mat-list-item  routerLink="/avaliacao">
+            <a mat-list-item routerLink="/avaliacao" *ngIf="avaliacao">
                 <i class="material-icons">
                   question_answer
                 </i>
                 Avaliações
             </a>
-            <a mat-list-item  routerLink="/admin">
+            <a mat-list-item routerLink="/admin" ng-hide="formVisibility" *ngIf="admin">
               <i class="material-icons">
                 addchart
               </i>
               Editar Avaliação
             </a>
-            <a mat-list-item  routerLink="/admin/cadastro">
+            <a mat-list-item routerLink="/admin/cadastro" *ngIf="criaQuestionario">
               <i class="material-icons">
                 description
               </i>
               Criar Questionário
             </a>
-            <a mat-list-item  routerLink="/cadastro-pj">
+            <a mat-list-item routerLink="/cadastro-pj" *ngIf="empresa">
               <i class="material-icons">
                   store
               </i>
               Cadastro Empresa
             </a>
-            <a mat-list-item  routerLink="/cadastro-pf">
+            <a mat-list-item routerLink="/cadastro-pf" *ngIf="usuario">
                 <i class="material-icons">
                     people_outline
                 </i>
                 Cadastro Usuários
             </a>
-            <a mat-list-item  routerLink="/admin/relatorio">
+            <a mat-list-item routerLink="/admin/relatorio" *ngIf="relatorio">
               <i class="material-icons">
                 assignment
               </i>
               Relatórios
             </a>
-            <a mat-list-item  routerLink="/cadastro-pf">
+            <a mat-list-item routerLink="/cadastro-pf" *ngIf="upload">
               <i class="material-icons">
                 note_add
               </i>

@@ -10,6 +10,8 @@ import {MatListModule} from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 
+import { SharedModule } from './shared/shared.module';
+
 import {
   LoginModule,
   LoginRoutingModule,
@@ -72,6 +74,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
 
     AppRoutingModule
   ],
