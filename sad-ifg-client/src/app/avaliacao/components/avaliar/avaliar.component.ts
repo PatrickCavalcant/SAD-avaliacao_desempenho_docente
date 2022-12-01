@@ -34,6 +34,7 @@ import * as $ from 'jquery';
 })
 
 export class AvaliarComponent implements OnInit {
+
   form: FormGroup;
   dataSource: MatTableDataSource<Lancamento>;
 
@@ -358,6 +359,7 @@ export class AvaliarComponent implements OnInit {
         }
       );
   }
+
 
   
 
