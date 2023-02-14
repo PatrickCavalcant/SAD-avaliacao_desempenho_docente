@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage{pgfgantt}
+\usepackage[portuguese]{babel}
+\begin{document}
+
+\begin{ganttchart}[y unit title=0.4cm,
+y unit chart=0.5cm,
+vgrid,hgrid,
+title height=1,
+bar/.style={draw,fill=cyan},
+bar incomplete/.append style={fill=yellow!50},
+bar height=0.7]{1}{24}
+ \gantttitle{Maio}{12}
+ \gantttitle{Junho}{12} \\
+ \gantttitlelist{20,...,31}{1}
+ \gantttitlelist{1,...,12}{1} \\
+ \ganttbar{Fase 1}{3}{7} \\
+ \ganttbar{Fase 2}{7}{12} \\
+ \ganttbar[progress=70]{Fase 3}{13}{18} \\
+ \ganttbar[progress=40]{Conclus\~ao}{20}{24} \\
+ % rela\c c\~oes
+ \ganttlink{elem0}{elem1}
+ \ganttlink{elem1}{elem2}
+ \ganttlink{elem2}{elem3}
+\end{ganttchart}
+
+\end{document}
