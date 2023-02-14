@@ -14,10 +14,10 @@ TCC -  (SAD  - Sistema de Avaliação Desempenho Docente do Instituto Federal de
 
 <p>
  O projeto aqui desenvolvido utiliza como padrão o Angular 12 integrado com uma API Restful criada com Spring Boot e Java.</br>
-A integração consistui em consumir uma API Restful em Spring e Java, com cadastro de usuários, autenticação via token JWT (JSON Web Token) e CRUDs de cadastro, que incluem listagem de dados com paginação e ordenação.
+A integração consistiu em consumir uma API Restful em Spring e Java, com cadastro de usuários, autenticação via token JWT (JSON Web Token) e CRUDs de cadastro, que incluem listagem de dados com paginação e ordenação.
 </p>
 
-<a href="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-api"> <h3> Sistema de Avaliação Desempenho Docente API RESTful</h3> </a>
+<a href="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-api"> <h3> Sistema de Avaliação Desempenho Docente - API RESTful</h3> </a>
 API do sistema do SAD com Java e Spring Boot.
 ### Como executar a aplicação
 
@@ -26,7 +26,7 @@ API do sistema do SAD com Java e Spring Boot.
 API será executada em http://localhost:8080
 ```
 
-<a href="https://github.com/PatrickCavalcant/ponto-inteligente/tree/main/ponto-inteligente-client"> <h3> Sistema de Avaliação Desempenho Docente Cliente </h3> </a>
+<a href="https://github.com/PatrickCavalcant/ponto-inteligente/tree/main/ponto-inteligente-client"> <h3> Sistema de Avaliação Desempenho Docente - Cliente </h3> </a>
 Código cliente Angular 12 do sistema SAD.
 ### Como executar a aplicação
 O código cliente depende da API RESTful, que deverá estar configurada e em execução como requisito.
@@ -48,8 +48,10 @@ npm start
 ```
 Acesse a aplicação em [http://localhost:4200](http://localhost:4200)  
 
+*Para sua execução certifique-se também de possuir o [NodeJS](http://nodejs.org).*  
+*A instalação do @angular/cli acima pode necessitar ser executada como admin do sistema*  
 
-<h4>O foi desenvolvido: </h4>
+<h4>O foi que desenvolvido: </h4>
 Criado aplicações com recursos avançados do Angular </br>
 Consumir uma API RESTful criada em Spring Boot/Java </br>
 Criar aplicações com o Angular Material </br>
@@ -65,15 +67,20 @@ Criar tabelas de listagem de dados com paginação e ordenação</br>
 Criar tabelas de listagem de dados Lazy loading</br>
 Criar formulários com recursos avançados.</br>
 
-
-*Para sua execução certifique-se também de possuir o [NodeJS](http://nodejs.org).*  
-*A instalação do @angular/cli acima pode necessitar ser executada como admin do sistema*  
-
+</br>
 <p>
-    Tela de Login <br/>
-    <img src="img/SAD1.jpeg" width="800"><br/>
-    Home <br/>
-    <img src="img/SAD2.jpeg" width="800"><br/>
-    Tela de Avaliação Docente <br/>
-    <img src="img/SAD3.png" width="800"><br/>
+    <h4>Tela de Login</h4> <br/>
+    <img src="img/Login.png" width="800"><br/>
+    <h4>Tela inicial das avaliações</h4> <br/>
+    <img src="img/Avaliações.png" width="800"><br/>
+    <h4>Tela de listar notas</h4> <br/>
+    <img src="img/EditarNotas.png" width="800"><br/>
+    <h4>Tela de editar notas</h4> <br/>
+    <img src="img/Editar.png" width="800"><br/>
+    <h4>Relatório das notas lançadas para os docentes</h4> <br/>
+    <img src="img/Relatorio.png" width="800"><br/>
+    <h4>Tela de cadastrar empresas</h4> <br/>
+    <img src="img/Empresas.png" width="800"><br/>
+    <h4>Tela de cadastrar usuários</h4> <br/>
+    <img src="img/Usuario.png" width="800"><br/>
 </p>
