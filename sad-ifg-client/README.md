@@ -1,7 +1,7 @@
 # SAD - Sistema de Avaliação Docente (Cliente)
 Código cliente Angular 12 do sistema de avaliação.
 ### Como executar a aplicação
-O código cliente depende da API RESTful [https://github.com/PatrickCavalcant/ponto-inteligente-api](https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/sad-ifg-api), que deverá estar configurada e em execução como requisito.
+O código cliente depende da API RESTful [https://github.com/PatrickCavalcant/sad-ifg-api](https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-api), que deverá estar configurada e em execução como requisito.
 Para executar o cliente (após a execução da API RESTful), execute os seguintes passos:
 ```
 cd sad-ifg-client
