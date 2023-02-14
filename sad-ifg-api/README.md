@@ -10,3 +10,4 @@ API do sistema de Avaliação Docente com Java e Spring Boot.
 ./mvnw spring-boot:run
 API será executada em http://localhost:8080
 ```
+
