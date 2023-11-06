@@ -1,16 +1,17 @@
 # SAD - Sistema de Avaliação Docente (Cliente)
-Código cliente Angular 12 do sistema de avaliação.
+
 ### Como executar a aplicação
-O código cliente depende da API RESTful [https://github.com/PatrickCavalcant/sad-ifg-api](https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-api), que deverá estar configurada e em execução como requisito.
-Para executar o cliente (após a execução da API RESTful), execute os seguintes passos:
+
 ```
-cd sad-ifg-client
-npm install -g @angular/cli
-npm install
+mvn spring-boot:run
 npm start
 ```
-Acesse a aplicação em [http://localhost:4200](http://localhost:4200)  
+Acesse a aplicação em [http://localhost:8080](http://localhost:8080)  
 
-*Para sua execução certifique-se também de possuir o [NodeJS](http://nodejs.org).*  
-*A instalação do @angular/cli acima pode necessitar ser executada como admin do sistema*  
+*Para sua execução certifique-se também de possuir o XAMPP com o banco de dados SAD configurado*  
 
+<h4>Bando de Dados SAD - PHPMyAdmin</h4> <br/>
+<img src="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/blob/main/img/BD_SAD.png" width="800">
+
+<h4>XAMPP</h4> <br/>
+<img src="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/blob/main/img/XAMPP.png" width="800">
