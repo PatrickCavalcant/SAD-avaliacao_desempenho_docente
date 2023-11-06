@@ -22,19 +22,19 @@ API do sistema do SAD com Java e Spring Boot.
 ### Como executar a aplicação
 
 ```
-./mvn spring-boot:run
+mvn spring-boot:run
 API será executada em http://localhost:8080
 ```
 
-<a href="https://github.com/PatrickCavalcant/ponto-inteligente/tree/main/ponto-inteligente-client"> <h3> Sistema de Avaliação Desempenho Docente - Cliente </h3> </a>
+<a href="https://github.com/PatrickCavalcant/SAD-avaliacao_desempenho_docente/tree/main/sad-ifg-client"> <h3> Sistema de Avaliação Desempenho Docente - Cliente </h3> </a>
 Código cliente Angular 12 do sistema SAD.
 ### Como executar a aplicação
 O código cliente depende da API RESTful, que deverá estar configurada e em execução como requisito.
 Para executar o cliente (após a execução da API RESTful), execute os seguintes passos:
 ```
-cd ponto-inteligente-client
+cd sad-ifg-client
 npm install -g @angular/cli
-npm install
+npm start
 ```
 
 Será necessário a instalação do JQuery:
